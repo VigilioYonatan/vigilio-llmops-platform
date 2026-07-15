@@ -1,0 +1,22 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Keep shell scripts LF
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Keep batch files CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.webm binary
+*.pdf binary
+*.tar.gz binary
+*.zip binary
