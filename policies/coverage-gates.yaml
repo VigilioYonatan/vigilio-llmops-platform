@@ -1,0 +1,45 @@
+# Policy: Vigilio LLMOps Platform Coverage & Quality Gates
+# Note: Project governance policy consumed by CI/verifiers alongside Vitest native config.
+version: "1.0.0"
+owner: vigilio-llmops-architecture
+enforcement: blocking
+
+repositories:
+  vigilio-llmops-impl:
+    scope:
+      include:
+        - "src/**/*.ts"
+      exclude:
+        - "src/main.ts"
+        - "src/**/*.module.ts"
+        - "src/**/ports/*.ts"
+        - "src/**/doc/*.doc.ts"
+    thresholds:
+      lines: 85
+      statements: 85
+      functions: 85
+      branches: 75
+    required_suites:
+      - unit
+      - integration_pg_valkey_nats
+      - contract_openapi_diff
+      - bdd_cucumber
+      - security_idor_oauth_ssrf
+      - e2e_api
+
+  vigilio-llmops-web:
+    scope:
+      include:
+        - "src/**/*.{ts,tsx}"
+      exclude:
+        - "src/main.tsx"
+    thresholds:
+      lines: 85
+      statements: 85
+      functions: 80
+      branches: 75
+    required_suites:
+      - preact_compat_lockfile
+      - unit_and_components_msw
+      - e2e_playwright_fullstack
+      - a11y_wcag22_aa_axe
