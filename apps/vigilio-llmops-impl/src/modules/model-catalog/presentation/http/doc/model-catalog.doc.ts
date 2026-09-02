@@ -1,0 +1,93 @@
+import { registerEndpointDocs } from '../../../../../shared/http/openapi-doc.registry';
+import {
+  modelCreateSchema,
+  providerCreateSchema,
+  providerPatchSchema,
+  routeCreateSchema,
+  routePatchSchema,
+} from '../dto/model-catalog.dto';
+
+registerEndpointDocs([
+  {
+    method: 'post',
+    path: '/api/v1/providers',
+    tag: 'ModelCatalog',
+    summary: 'Register model provider',
+    auth: 'session',
+    requestBody: providerCreateSchema,
+  },
+  {
+    method: 'get',
+    path: '/api/v1/providers',
+    tag: 'ModelCatalog',
+    summary: 'List model providers',
+    auth: 'session',
+  },
+  {
+    method: 'patch',
+    path: '/api/v1/providers/{provider_id}',
+    tag: 'ModelCatalog',
+    summary: 'Update model provider',
+    auth: 'session',
+    requestBody: providerPatchSchema,
+  },
+  {
+    method: 'post',
+    path: '/api/v1/providers/{provider_id}/verify',
+    tag: 'ModelCatalog',
+    summary: 'Verify operator model provider connectivity',
+    auth: 'session',
+  },
+  {
+    method: 'get',
+    path: '/api/v1/models',
+    tag: 'ModelCatalog',
+    summary: 'List registered models',
+    auth: 'session',
+  },
+  {
+    method: 'post',
+    path: '/api/v1/models',
+    tag: 'ModelCatalog',
+    summary: 'Register model in catalog',
+    auth: 'session',
+    requestBody: modelCreateSchema,
+  },
+  {
+    method: 'get',
+    path: '/api/v1/models/{model_id}',
+    tag: 'ModelCatalog',
+    summary: 'Get model metadata',
+    auth: 'session',
+  },
+  {
+    method: 'post',
+    path: '/api/v1/model-routes',
+    tag: 'ModelCatalog',
+    summary: 'Configure application environment model route',
+    auth: 'session',
+    requestBody: routeCreateSchema,
+  },
+  {
+    method: 'get',
+    path: '/api/v1/model-routes',
+    tag: 'ModelCatalog',
+    summary: 'List model routes for application',
+    auth: 'session',
+  },
+  {
+    method: 'patch',
+    path: '/api/v1/model-routes/{route_id}',
+    tag: 'ModelCatalog',
+    summary: 'Update model route primary/fallback',
+    auth: 'session',
+    requestBody: routePatchSchema,
+  },
+  {
+    method: 'post',
+    path: '/api/v1/model-routes/{route_id}/validate',
+    tag: 'ModelCatalog',
+    summary: 'Validate model route readiness',
+    auth: 'session',
+  },
+]);
