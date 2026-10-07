@@ -1,0 +1,10 @@
+packages: []
+strictDepBuilds: true
+minimumReleaseAge: 1440
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - argon2
+  - esbuild
+ignoredBuiltDependencies:
+  - '@scarf/scarf'
+  - protobufjs

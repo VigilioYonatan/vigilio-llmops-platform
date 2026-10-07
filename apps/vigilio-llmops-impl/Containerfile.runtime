@@ -1,0 +1,18 @@
+FROM node:24.11.1-bookworm-slim AS build
+# glibc build stage: native argon2 bindings must match the glibc-based distroless runtime.
+WORKDIR /app
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY tsconfig*.json ./
+COPY src ./src
+RUN pnpm build && pnpm prune --prod
+FROM gcr.io/distroless/nodejs24-debian13:nonroot
+WORKDIR /app
+COPY --from=build --chown=65532:65532 /app/dist ./dist
+COPY --from=build --chown=65532:65532 /app/src/database/migrations ./dist/database/migrations
+COPY --from=build --chown=65532:65532 /app/node_modules ./node_modules
+COPY --from=build --chown=65532:65532 /app/package.json ./package.json
+USER 65532:65532
+ENV NODE_ENV=production
+CMD ["dist/main.js", "api"]

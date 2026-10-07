@@ -1,0 +1,4248 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/alert-rules": {
+      "post": {
+        "operationId": "AlertRulesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AlertRules"
+        ]
+      },
+      "get": {
+        "operationId": "AlertRulesController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AlertRules"
+        ]
+      }
+    },
+    "/api/v1/alert-rules/{rule_id}": {
+      "patch": {
+        "operationId": "AlertRulesController_patch",
+        "parameters": [
+          {
+            "name": "rule_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AlertRules"
+        ]
+      }
+    },
+    "/api/v1/alerts": {
+      "get": {
+        "operationId": "AlertsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Alerts"
+        ]
+      }
+    },
+    "/api/v1/alerts/{alert_id}/acknowledge": {
+      "post": {
+        "operationId": "AlertsController_ack",
+        "parameters": [
+          {
+            "name": "alert_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Alerts"
+        ]
+      }
+    },
+    "/api/v1/applications": {
+      "post": {
+        "operationId": "ApplicationsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      },
+      "get": {
+        "operationId": "ApplicationsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}": {
+      "get": {
+        "operationId": "ApplicationsController_get",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      },
+      "patch": {
+        "operationId": "ApplicationsController_patch",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/environments": {
+      "post": {
+        "operationId": "ApplicationsController_addEnvironment",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      },
+      "get": {
+        "operationId": "ApplicationsController_environments",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/keys": {
+      "post": {
+        "operationId": "ApplicationsController_key",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      },
+      "get": {
+        "operationId": "ApplicationsController_keys",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/keys/{key_id}": {
+      "delete": {
+        "operationId": "ApplicationsController_revoke",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/sdk-credentials": {
+      "post": {
+        "operationId": "ApplicationsController_sdkKey",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      },
+      "get": {
+        "operationId": "ApplicationsController_sdkKeys",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/sdk-credentials/{credential_id}": {
+      "delete": {
+        "operationId": "ApplicationsController_revokeSdkKey",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "credential_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/sdk-credentials/{credential_id}/rotate": {
+      "post": {
+        "operationId": "ApplicationsController_rotateSdkKey",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "credential_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{app_id}/summary": {
+      "get": {
+        "operationId": "ApplicationsController_summary",
+        "parameters": [
+          {
+            "name": "app_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Applications"
+        ]
+      }
+    },
+    "/api/v1/applications/{application_id}/datasets": {
+      "post": {
+        "operationId": "AppDatasetsController_dataset",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AppDatasets"
+        ]
+      },
+      "get": {
+        "operationId": "AppDatasetsController_datasets",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AppDatasets"
+        ]
+      }
+    },
+    "/api/v1/applications/{application_id}/errors": {
+      "get": {
+        "operationId": "ApplicationTelemetryController_errors",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ApplicationTelemetry"
+        ]
+      }
+    },
+    "/api/v1/applications/{application_id}/prompts": {
+      "post": {
+        "operationId": "AppPromptsController_prompt",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AppPrompts"
+        ]
+      },
+      "get": {
+        "operationId": "AppPromptsController_prompts",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AppPrompts"
+        ]
+      }
+    },
+    "/api/v1/applications/{application_id}/timeseries": {
+      "get": {
+        "operationId": "ApplicationTelemetryController_timeseries",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ApplicationTelemetry"
+        ]
+      }
+    },
+    "/api/v1/audit-events": {
+      "get": {
+        "operationId": "AuditEventsController_list",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "before",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AuditEvents"
+        ]
+      }
+    },
+    "/api/v1/audit-events/{event_id}": {
+      "get": {
+        "operationId": "AuditEventsController_detail",
+        "parameters": [
+          {
+            "name": "event_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AuditEvents"
+        ]
+      }
+    },
+    "/api/v1/auth/csrf": {
+      "get": {
+        "operationId": "AuthController_csrf",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/email/resend": {
+      "post": {
+        "operationId": "AuthController_resend",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/email/verify": {
+      "post": {
+        "operationId": "AuthController_verify",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/facebook/callback": {
+      "get": {
+        "operationId": "FacebookAuthController_callback",
+        "parameters": [
+          {
+            "name": "state",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "error",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "FacebookAuth"
+        ]
+      }
+    },
+    "/api/v1/auth/facebook/data-deletion": {
+      "post": {
+        "operationId": "FacebookAuthController_delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "FacebookAuth"
+        ]
+      }
+    },
+    "/api/v1/auth/facebook/start": {
+      "get": {
+        "operationId": "FacebookAuthController_start",
+        "parameters": [
+          {
+            "name": "return_to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "FacebookAuth"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout-all": {
+      "post": {
+        "operationId": "AuthController_logoutAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/mfa/complete": {
+      "post": {
+        "operationId": "AuthController_mfaComplete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/password/forgot": {
+      "post": {
+        "operationId": "AuthController_forgot",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/password/reset": {
+      "post": {
+        "operationId": "AuthController_reset",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/budget-policies": {
+      "post": {
+        "operationId": "BudgetPoliciesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "BudgetPolicies"
+        ]
+      },
+      "get": {
+        "operationId": "BudgetPoliciesController_list",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "BudgetPolicies"
+        ]
+      }
+    },
+    "/api/v1/budget-policies/{budget_id}": {
+      "patch": {
+        "operationId": "BudgetPoliciesController_patch",
+        "parameters": [
+          {
+            "name": "budget_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "BudgetPolicies"
+        ]
+      }
+    },
+    "/api/v1/budget-policies/{budget_id}/simulate": {
+      "post": {
+        "operationId": "BudgetPoliciesController_simulate",
+        "parameters": [
+          {
+            "name": "budget_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "BudgetPolicies"
+        ]
+      }
+    },
+    "/api/v1/budgets": {
+      "post": {
+        "operationId": "BudgetsController_upsert",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Budgets"
+        ]
+      },
+      "get": {
+        "operationId": "BudgetsController_get",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Budgets"
+        ]
+      }
+    },
+    "/api/v1/costs/ledger": {
+      "get": {
+        "operationId": "CostsController_ledger",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      }
+    },
+    "/api/v1/costs/overview": {
+      "get": {
+        "operationId": "CostsController_overview",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      }
+    },
+    "/api/v1/costs/price-cards": {
+      "post": {
+        "operationId": "CostsController_card",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      },
+      "get": {
+        "operationId": "CostsController_cards",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      }
+    },
+    "/api/v1/costs/reconciliations": {
+      "post": {
+        "operationId": "CostsController_reconcile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      }
+    },
+    "/api/v1/costs/usage": {
+      "get": {
+        "operationId": "CostsController_usage",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Costs"
+        ]
+      }
+    },
+    "/api/v1/data-requests": {
+      "get": {
+        "operationId": "DataRequestsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DataRequests"
+        ]
+      }
+    },
+    "/api/v1/data-requests/delete": {
+      "post": {
+        "operationId": "DataRequestsController_delete",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DataRequests"
+        ]
+      }
+    },
+    "/api/v1/data-requests/export": {
+      "post": {
+        "operationId": "DataRequestsController_export",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DataRequests"
+        ]
+      }
+    },
+    "/api/v1/data-requests/{request_id}": {
+      "get": {
+        "operationId": "DataRequestsController_status",
+        "parameters": [
+          {
+            "name": "request_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DataRequests"
+        ]
+      }
+    },
+    "/api/v1/dataset-imports/{import_id}": {
+      "get": {
+        "operationId": "DatasetImportStatusController_get",
+        "parameters": [
+          {
+            "name": "import_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DatasetImportStatus"
+        ]
+      }
+    },
+    "/api/v1/datasets": {
+      "post": {
+        "operationId": "DatasetsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      },
+      "get": {
+        "operationId": "DatasetsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{dataset_id}/draft/cases/{case_id}": {
+      "patch": {
+        "operationId": "DatasetsController_patch",
+        "parameters": [
+          {
+            "name": "dataset_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "case_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{dataset_id}/imports": {
+      "post": {
+        "operationId": "DatasetsController_imports",
+        "parameters": [
+          {
+            "name": "dataset_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{dataset_id}/versions": {
+      "post": {
+        "operationId": "DatasetsController_freeze",
+        "parameters": [
+          {
+            "name": "dataset_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      },
+      "get": {
+        "operationId": "DatasetsController_versions",
+        "parameters": [
+          {
+            "name": "dataset_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{dataset_id}/versions/{version_id}/cases": {
+      "get": {
+        "operationId": "DatasetsController_snapshot",
+        "parameters": [
+          {
+            "name": "dataset_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{id}": {
+      "get": {
+        "operationId": "DatasetsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{id}/cases": {
+      "get": {
+        "operationId": "DatasetsController_cases",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      },
+      "post": {
+        "operationId": "DatasetsController_addCase",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{id}/cases/{case_id}": {
+      "delete": {
+        "operationId": "DatasetsController_removeCase",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "case_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{id}/draft/cases": {
+      "post": {
+        "operationId": "DatasetsController_draftAdd",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/datasets/{id}/draft/cases/{case_id}": {
+      "delete": {
+        "operationId": "DatasetsController_draftRemove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "case_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Datasets"
+        ]
+      }
+    },
+    "/api/v1/evaluation-comparisons": {
+      "post": {
+        "operationId": "EvaluationComparisonsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "EvaluationComparisons"
+        ]
+      },
+      "get": {
+        "operationId": "EvaluationComparisonsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "EvaluationComparisons"
+        ]
+      }
+    },
+    "/api/v1/evaluation-comparisons/{comparison_id}": {
+      "get": {
+        "operationId": "EvaluationComparisonsController_detail",
+        "parameters": [
+          {
+            "name": "comparison_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "EvaluationComparisons"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs": {
+      "post": {
+        "operationId": "EvaluationsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      },
+      "get": {
+        "operationId": "EvaluationsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}": {
+      "get": {
+        "operationId": "EvaluationsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/annotations": {
+      "post": {
+        "operationId": "EvaluationsController_annotate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      },
+      "get": {
+        "operationId": "EvaluationsController_annotations",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/cancel": {
+      "post": {
+        "operationId": "EvaluationsController_cancel",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/cases": {
+      "get": {
+        "operationId": "EvaluationsController_cases",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/export": {
+      "post": {
+        "operationId": "EvaluationsController_exportRun",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/metrics": {
+      "get": {
+        "operationId": "EvaluationsController_metrics",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluation-runs/{id}/results": {
+      "get": {
+        "operationId": "EvaluationsController_results",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluations"
+        ]
+      }
+    },
+    "/api/v1/evaluators": {
+      "post": {
+        "operationId": "EvaluatorsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "get": {
+        "operationId": "EvaluatorsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      }
+    },
+    "/api/v1/evaluators/{evaluator_id}/calibrations": {
+      "post": {
+        "operationId": "EvaluatorsController_calibration",
+        "parameters": [
+          {
+            "name": "evaluator_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      }
+    },
+    "/api/v1/evaluators/{evaluator_id}/versions": {
+      "post": {
+        "operationId": "EvaluatorsController_version",
+        "parameters": [
+          {
+            "name": "evaluator_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "get": {
+        "operationId": "EvaluatorsController_versions",
+        "parameters": [
+          {
+            "name": "evaluator_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      }
+    },
+    "/api/v1/gateway/generate": {
+      "post": {
+        "operationId": "GatewayController_generate",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Gateway"
+        ]
+      }
+    },
+    "/api/v1/gateway/requests/{request_id}": {
+      "get": {
+        "operationId": "GatewayRequestsController_status",
+        "parameters": [
+          {
+            "name": "request_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "GatewayRequests"
+        ]
+      }
+    },
+    "/api/v1/incidents": {
+      "post": {
+        "operationId": "IncidentsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      },
+      "get": {
+        "operationId": "IncidentsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      }
+    },
+    "/api/v1/incidents/{incident_id}": {
+      "get": {
+        "operationId": "IncidentsController_get",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      }
+    },
+    "/api/v1/incidents/{incident_id}/events": {
+      "post": {
+        "operationId": "IncidentsController_event",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      }
+    },
+    "/api/v1/incidents/{incident_id}/regressions": {
+      "post": {
+        "operationId": "IncidentsController_regression",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      }
+    },
+    "/api/v1/incidents/{incident_id}/resolve": {
+      "post": {
+        "operationId": "IncidentsController_resolve",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Incidents"
+        ]
+      }
+    },
+    "/api/v1/ingest/traces": {
+      "post": {
+        "operationId": "TraceIngestController_ingest",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "TraceIngest"
+        ]
+      }
+    },
+    "/api/v1/invitations/{invitation_id}/accept": {
+      "post": {
+        "operationId": "InvitationsController_accept",
+        "parameters": [
+          {
+            "name": "invitation_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Invitations"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases": {
+      "get": {
+        "operationId": "KnowledgeController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      },
+      "post": {
+        "operationId": "KnowledgeController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/answer": {
+      "post": {
+        "operationId": "KnowledgeController_answer",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/documents": {
+      "post": {
+        "operationId": "KnowledgeController_doc",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      },
+      "get": {
+        "operationId": "KnowledgeController_docs",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/documents/{document_id}/acl": {
+      "patch": {
+        "operationId": "KnowledgeController_acl",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "document_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/jobs/{job_id}": {
+      "get": {
+        "operationId": "KnowledgeController_job",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/reindex": {
+      "post": {
+        "operationId": "KnowledgeController_reindex",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/knowledge-bases/{kb_id}/search": {
+      "post": {
+        "operationId": "KnowledgeController_search",
+        "parameters": [
+          {
+            "name": "kb_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Knowledge"
+        ]
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "MeController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      },
+      "patch": {
+        "operationId": "MeController_patch",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/email": {
+      "patch": {
+        "operationId": "MeController_changeEmail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/email/verify-change": {
+      "post": {
+        "operationId": "MeController_verifyEmailChange",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/identities": {
+      "get": {
+        "operationId": "LinkedIdentityController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "LinkedIdentity"
+        ]
+      }
+    },
+    "/api/v1/me/identities/facebook": {
+      "delete": {
+        "operationId": "LinkedIdentityController_unlink",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "LinkedIdentity"
+        ]
+      }
+    },
+    "/api/v1/me/identities/facebook/link": {
+      "post": {
+        "operationId": "LinkedIdentityController_link",
+        "parameters": [
+          {
+            "name": "mode",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "LinkedIdentity"
+        ]
+      }
+    },
+    "/api/v1/me/mfa/recovery-codes/rotate": {
+      "post": {
+        "operationId": "MeController_rotateCodes",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/mfa/step-up": {
+      "post": {
+        "operationId": "MeController_mfaStepUp",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/mfa/totp/disable": {
+      "post": {
+        "operationId": "MeController_disableMfa",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/mfa/totp/setup": {
+      "post": {
+        "operationId": "MeController_mfaSetup",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/mfa/totp/verify": {
+      "post": {
+        "operationId": "MeController_mfaVerify",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/password/change": {
+      "post": {
+        "operationId": "MeController_changePassword",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/sessions": {
+      "get": {
+        "operationId": "MeController_sessions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/me/sessions/{session_id}": {
+      "delete": {
+        "operationId": "MeController_revoke",
+        "parameters": [
+          {
+            "name": "session_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Me"
+        ]
+      }
+    },
+    "/api/v1/model-routes": {
+      "post": {
+        "operationId": "ModelRoutesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ModelRoutes"
+        ]
+      },
+      "get": {
+        "operationId": "ModelRoutesController_list",
+        "parameters": [
+          {
+            "name": "application_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ModelRoutes"
+        ]
+      }
+    },
+    "/api/v1/model-routes/{route_id}": {
+      "patch": {
+        "operationId": "ModelRoutesController_update",
+        "parameters": [
+          {
+            "name": "route_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ModelRoutes"
+        ]
+      }
+    },
+    "/api/v1/model-routes/{route_id}/validate": {
+      "post": {
+        "operationId": "ModelRoutesController_validate",
+        "parameters": [
+          {
+            "name": "route_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ModelRoutes"
+        ]
+      }
+    },
+    "/api/v1/models": {
+      "get": {
+        "operationId": "ModelsController_list",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      },
+      "post": {
+        "operationId": "ModelsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      }
+    },
+    "/api/v1/models/{model_id}": {
+      "get": {
+        "operationId": "ModelsController_get",
+        "parameters": [
+          {
+            "name": "model_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      }
+    },
+    "/api/v1/onboarding/complete": {
+      "post": {
+        "operationId": "OnboardingController_complete",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Onboarding"
+        ]
+      }
+    },
+    "/api/v1/onboarding/status": {
+      "get": {
+        "operationId": "OnboardingController_status",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Onboarding"
+        ]
+      }
+    },
+    "/api/v1/organizations": {
+      "post": {
+        "operationId": "OrganizationsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "get": {
+        "operationId": "OrganizationsController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}": {
+      "get": {
+        "operationId": "OrganizationsController_get",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "patch": {
+        "operationId": "OrganizationsController_patch",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/invitations": {
+      "get": {
+        "operationId": "OrganizationsController_invitations",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationsController_invite",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/invitations/{invitation_id}": {
+      "delete": {
+        "operationId": "OrganizationsController_revokeInvitation",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invitation_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/members": {
+      "get": {
+        "operationId": "OrganizationsController_members",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationsController_addMember",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/members/{member_id}": {
+      "patch": {
+        "operationId": "OrganizationsController_changeMemberRole",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "delete": {
+        "operationId": "OrganizationsController_removeMember",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/roles": {
+      "get": {
+        "operationId": "OrganizationsController_roles",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/organizations/{org_id}/workspaces": {
+      "get": {
+        "operationId": "OrganizationsController_workspaces",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationsController_workspace",
+        "parameters": [
+          {
+            "name": "org_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organizations"
+        ]
+      }
+    },
+    "/api/v1/privacy/deletion-status/{code}": {
+      "get": {
+        "operationId": "PrivacyController_status",
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Privacy"
+        ]
+      }
+    },
+    "/api/v1/prompts": {
+      "post": {
+        "operationId": "PromptsController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      },
+      "get": {
+        "operationId": "PromptsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{id}": {
+      "get": {
+        "operationId": "PromptsController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{id}/versions": {
+      "get": {
+        "operationId": "PromptsController_versions",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      },
+      "post": {
+        "operationId": "PromptsController_addVersion",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{id}/versions/{version_id}": {
+      "get": {
+        "operationId": "PromptsController_version",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{prompt_id}/aliases": {
+      "get": {
+        "operationId": "PromptsController_aliases",
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{prompt_id}/aliases/{environment}": {
+      "put": {
+        "operationId": "PromptsController_alias",
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{prompt_id}/diff": {
+      "post": {
+        "operationId": "PromptsController_diff",
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{prompt_id}/versions/{version_id}/playground": {
+      "post": {
+        "operationId": "PromptsController_playground",
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/prompts/{prompt_id}/versions/{version_id}/validate": {
+      "post": {
+        "operationId": "PromptsController_validate",
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Prompts"
+        ]
+      }
+    },
+    "/api/v1/providers": {
+      "post": {
+        "operationId": "ProvidersController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Providers"
+        ]
+      },
+      "get": {
+        "operationId": "ProvidersController_list",
+        "parameters": [
+          {
+            "name": "organization_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/v1/providers/{provider_id}": {
+      "patch": {
+        "operationId": "ProvidersController_update",
+        "parameters": [
+          {
+            "name": "provider_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/v1/providers/{provider_id}/verify": {
+      "post": {
+        "operationId": "ProvidersController_verify",
+        "parameters": [
+          {
+            "name": "provider_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Providers"
+        ]
+      }
+    },
+    "/api/v1/quality-policies": {
+      "post": {
+        "operationId": "QualityPoliciesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "QualityPolicies"
+        ]
+      },
+      "get": {
+        "operationId": "QualityPoliciesController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "QualityPolicies"
+        ]
+      }
+    },
+    "/api/v1/quality-policies/dry-run": {
+      "post": {
+        "operationId": "QualityPoliciesController_dryRun",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "QualityPolicies"
+        ]
+      }
+    },
+    "/api/v1/quality-policies/{policy_id}/versions": {
+      "post": {
+        "operationId": "QualityPoliciesController_version",
+        "parameters": [
+          {
+            "name": "policy_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "QualityPolicies"
+        ]
+      }
+    },
+    "/api/v1/releases": {
+      "post": {
+        "operationId": "ReleasesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      },
+      "get": {
+        "operationId": "ReleasesController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}": {
+      "get": {
+        "operationId": "ReleasesController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/activate": {
+      "post": {
+        "operationId": "ReleasesController_activate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/approve": {
+      "post": {
+        "operationId": "ReleasesController_approve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/evidence": {
+      "get": {
+        "operationId": "ReleasesController_evidence",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/reject": {
+      "post": {
+        "operationId": "ReleasesController_reject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/request-approval": {
+      "post": {
+        "operationId": "ReleasesController_requestApproval",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/rollback": {
+      "post": {
+        "operationId": "ReleasesController_rollback",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/rollout": {
+      "get": {
+        "operationId": "ReleasesController_rollout",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/rollout/pause": {
+      "post": {
+        "operationId": "ReleasesController_pause",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/rollout/resume": {
+      "post": {
+        "operationId": "ReleasesController_resume",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/verify": {
+      "post": {
+        "operationId": "ReleasesController_verify",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Releases"
+        ]
+      }
+    },
+    "/api/v1/sdk/events": {
+      "post": {
+        "operationId": "SdkController_event",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sdk"
+        ]
+      }
+    },
+    "/api/v1/sdk/feedback": {
+      "post": {
+        "operationId": "SdkController_feedback",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sdk"
+        ]
+      }
+    },
+    "/api/v1/system/capabilities": {
+      "get": {
+        "operationId": "SystemController_capabilities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v1/system/version": {
+      "get": {
+        "operationId": "SystemController_version",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v1/traces": {
+      "get": {
+        "operationId": "TracesController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/traces/summary": {
+      "get": {
+        "operationId": "TracesController_summary",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/traces/{id}": {
+      "get": {
+        "operationId": "TracesController_get",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/traces/{trace_id}/feedback": {
+      "get": {
+        "operationId": "TracesController_feedback",
+        "parameters": [
+          {
+            "name": "trace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/traces/{trace_id}/replay": {
+      "post": {
+        "operationId": "TracesController_replay",
+        "parameters": [
+          {
+            "name": "trace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/traces/{trace_id}/spans": {
+      "get": {
+        "operationId": "TracesController_spans",
+        "parameters": [
+          {
+            "name": "trace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Traces"
+        ]
+      }
+    },
+    "/api/v1/webhooks/facebook/data-deletion": {
+      "post": {
+        "operationId": "FacebookWebhookController_delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "FacebookWebhook"
+        ]
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}": {
+      "patch": {
+        "operationId": "WorkspacesController_patch",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications": {
+      "post": {
+        "operationId": "ScopedApplicationsController_create",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ScopedApplications"
+        ]
+      },
+      "get": {
+        "operationId": "ScopedApplicationsController_list",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ScopedApplications"
+        ]
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/members": {
+      "get": {
+        "operationId": "WorkspacesController_members",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Workspaces"
+        ]
+      }
+    },
+    "/health/live": {
+      "get": {
+        "operationId": "HealthController_liveness",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "operationId": "HealthController_readiness",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/metrics": {
+      "get": {
+        "operationId": "MetricsController_metrics",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      }
+    },
+    "/otlp/v1/metrics": {
+      "post": {
+        "operationId": "OtlpController_metrics",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Otlp"
+        ]
+      }
+    },
+    "/otlp/v1/traces": {
+      "post": {
+        "operationId": "OtlpController_traces",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Otlp"
+        ]
+      }
+    },
+    "/v1/chat/completions": {
+      "post": {
+        "operationId": "OpenAiCompatibilityController_completions",
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "OpenAiCompatibility"
+        ]
+      }
+    },
+    "/v1/embeddings": {
+      "post": {
+        "operationId": "OpenAiCompatibilityController_embeddings",
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "OpenAiCompatibility"
+        ]
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "operationId": "OpenAiCompatibilityController_models",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "OpenAiCompatibility"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Vigilio LLMOps Platform API",
+    "description": "Self-hosted enterprise LLMOps platform API specification",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "cookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "vigilio_session",
+        "description": "HttpOnly SameSite session cookie"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Bearer vgl_... API key"
+      },
+      "BearerAuth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "Bearer token for system endpoints"
+      }
+    },
+    "schemas": {}
+  }
+}

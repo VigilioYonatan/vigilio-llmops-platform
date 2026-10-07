@@ -1,0 +1,30 @@
+name: Backend · Quality and Supply Chain
+on: {push: {branches: [main]}, pull_request: {}}
+permissions: {contents: read}
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false}
+      - name: Activate Node and pnpm
+        run: |
+          node --version
+          corepack enable
+      - name: Deterministic install
+        run: pnpm install --frozen-lockfile
+      - name: Biome / TypeScript / Hexagonal boundaries
+        run: |
+          pnpm lint
+          pnpm typecheck
+          pnpm check:boundaries
+      - name: Unit + coverage
+        run: pnpm test:coverage
+      - name: Supply-chain scan (runner preinstalled tools)
+        run: |
+          command -v gitleaks
+          command -v trivy
+          gitleaks detect --source . --exit-code 1
+          trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+      - name: Build
+        run: pnpm build
