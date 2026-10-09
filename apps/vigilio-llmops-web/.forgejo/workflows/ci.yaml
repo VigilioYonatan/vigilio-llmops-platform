@@ -1,0 +1,18 @@
+name: Web · Quality and Browser Safety
+on: {push: {branches: [main]}, pull_request: {}}
+permissions: {contents: read}
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false}
+      - run: corepack enable && pnpm install --frozen-lockfile
+      - run: pnpm lint && pnpm typecheck && pnpm test:coverage
+      - run: pnpm build
+      - name: Browser tests (backend/test services must be running)
+        run: pnpm test:e2e
+      - name: Secret and dependency scans
+        run: |
+          gitleaks detect --source . --exit-code 1
+          trivy fs --exit-code 1 --severity HIGH,CRITICAL .

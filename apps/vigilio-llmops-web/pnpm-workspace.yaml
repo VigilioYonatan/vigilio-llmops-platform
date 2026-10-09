@@ -1,0 +1,8 @@
+packages: []
+strictDepBuilds: true
+minimumReleaseAge: 1440
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - msw
