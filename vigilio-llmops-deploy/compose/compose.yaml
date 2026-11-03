@@ -1,0 +1,712 @@
+---
+name: ${COMPOSE_PROJECT_NAME:-vigilio-llmops}
+
+x-backend: &backend
+  image: ${BACKEND_IMAGE:?BACKEND_IMAGE must be set to an immutable @sha256 digest in staging/production}
+  restart: unless-stopped
+  read_only: true
+  user: "65532:65532"
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  cpus: 1.00
+  mem_limit: 768m
+  pids_limit: 256
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,nodev,size=64m
+  init: true
+  env_file:
+    - ${ENV_FILE:-.env}
+  environment:
+    NODE_ENV: ${APP_NODE_ENV:-production}
+    PORT: "3000"
+    DATABASE_URL_FILE: /run/secrets/database_url
+    VALKEY_PASSWORD_FILE: /run/secrets/valkey_password
+    NATS_TOKEN_FILE: /run/secrets/nats_token
+    SESSION_SECRET_FILE: /run/secrets/session_secret
+    ENCRYPTION_KEY_B64_FILE: /run/secrets/encryption_key_b64
+    FACEBOOK_APP_SECRET_FILE: /run/secrets/facebook_app_secret
+    SMTP_PASSWORD_FILE: /run/secrets/smtp_password
+    METRICS_TOKEN_FILE: /run/secrets/metrics_token
+    SMTP_USERNAME: ${SMTP_USERNAME:-}
+    NATS_URL: ${NATS_URL:-nats://nats:4222}
+    VALKEY_URL: ${VALKEY_URL:-redis://valkey:6379}
+    APP_ORIGIN: ${SITE_ORIGIN:?SITE_ORIGIN required}
+    WEB_ORIGIN: ${WEB_ORIGIN:?WEB_ORIGIN required}
+    SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-true}
+    ALLOWED_MODEL_BASE_URL: ${MODEL_BASE_URL:-http://ollama:11434}
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+    SMTP_HOST: ${SMTP_HOST:-mailpit}
+    SMTP_PORT: ${SMTP_PORT:-1025}
+    SMTP_FROM: ${SMTP_FROM:-no-reply@vigilio.invalid}
+  secrets:
+    - database_url
+    - valkey_password
+    - nats_token
+    - session_secret
+    - encryption_key_b64
+    - facebook_app_secret
+    - smtp_password
+    - metrics_token
+  depends_on:
+    postgres:
+      condition: service_healthy
+    nats:
+      condition: service_healthy
+    valkey:
+      condition: service_healthy
+  logging:
+    driver: json-file
+    options:
+      max-size: "15m"
+      max-file: "4"
+
+services:
+  caddy:
+    image: ${CADDY_IMAGE:?CADDY_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 256m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    ports:
+      - "${CADDY_BIND_ADDRESS:-0.0.0.0}:80:80"
+      - "${CADDY_BIND_ADDRESS:-0.0.0.0}:443:443"
+      - "${CADDY_BIND_ADDRESS:-0.0.0.0}:443:443/udp"
+    environment:
+      SITE_ADDRESS: "${SITE_ADDRESS:?SITE_ADDRESS required}"
+      GRAFANA_ALLOWED_CIDR: "${GRAFANA_ALLOWED_CIDR:-127.0.0.1/32}"
+    volumes:
+      - ../edge/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - edge
+      - reverse_proxy
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "caddy", "version"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "15m"
+        max-file: "4"
+
+  web:
+    image: ${WEB_IMAGE:?WEB_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 192m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:size=32m
+      - /config:size=16m
+      - /data:size=16m
+    expose:
+      - "8080"
+    networks:
+      - reverse_proxy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  api:
+    <<: *backend
+    command: ["dist/main.js", "api"]
+    expose:
+      - "3000"
+    networks:
+      - reverse_proxy
+      - backend
+      - observability
+      - egress
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/nodejs/bin/node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  worker:
+    <<: *backend
+    command: ["dist/main.js", "worker"]
+    cpus: 1.00
+    mem_limit: 768m
+    pids_limit: 256
+    networks:
+      - backend
+      - observability
+      - egress
+
+  outbox:
+    <<: *backend
+    command: ["dist/main.js", "outbox"]
+    cpus: 0.50
+    mem_limit: 384m
+    pids_limit: 128
+    networks:
+      - backend
+      - observability
+
+  migration:
+    <<: *backend
+    restart: "no"
+    profiles:
+      - tools
+    command: ["dist/main.js", "migration"]
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    networks:
+      - backend
+
+  platform-setup:
+    <<: *backend
+    restart: "no"
+    profiles:
+      - tools
+    command: ["dist/main.js", "platform-setup"]
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    networks:
+      - backend
+
+  postgres:
+    image: ${POSTGRES_IMAGE:?POSTGRES_IMAGE required}
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    security_opt:
+      - no-new-privileges:true
+    cpus: 2.00
+    mem_limit: 2048m
+    pids_limit: 512
+    shm_size: 256mb
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=128m
+      - /var/run/postgresql:rw,nosuid,nodev,size=16m
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-llmops}
+      POSTGRES_DB: ${POSTGRES_DB:-llmops}
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets:
+      - postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-llmops} -d ${POSTGRES_DB:-llmops}"]
+      interval: 10s
+      timeout: 4s
+      retries: 10
+      start_period: 15s
+    networks:
+      - backend
+    logging:
+      driver: json-file
+      options:
+        max-size: "15m"
+        max-file: "4"
+
+  valkey:
+    image: ${VALKEY_IMAGE:?VALKEY_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "999:1000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 384m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+      - /data:rw,noexec,nosuid,nodev,size=32m
+    command:
+      - sh
+      - -ec
+      - >-
+        exec valkey-server
+        --save ""
+        --appendonly no
+        --maxmemory 256mb
+        --maxmemory-policy allkeys-lru
+        --requirepass "$(cat /run/secrets/valkey_password)"
+    secrets:
+      - valkey_password
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "REDISCLI_AUTH=\"$(cat /run/secrets/valkey_password)\" valkey-cli -h 127.0.0.1 ping | grep -q PONG"
+        ]
+      interval: 15s
+      timeout: 4s
+      retries: 5
+      start_period: 5s
+    networks:
+      - backend
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  nats:
+    image: ${NATS_IMAGE:?NATS_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 384m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    entrypoint: ["sh", "-ec"]
+    command:
+      - 'exec nats-server -js -sd /data -m 8222 --auth "$(cat /run/secrets/nats_token)"'
+    secrets:
+      - nats_token
+    volumes:
+      - nats_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8222/healthz"]
+      interval: 15s
+      timeout: 4s
+      retries: 5
+      start_period: 5s
+    networks:
+      - backend
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  pgbackrest:
+    image: ${PGBACKREST_IMAGE:?PGBACKREST_IMAGE required}
+    profiles:
+      - backup
+    restart: unless-stopped
+    read_only: true
+    user: "999:999"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 1.00
+    mem_limit: 512m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+    environment:
+      PGBACKREST_STANZA: ${PGBACKREST_STANZA:-llmops}
+      PGBACKREST_REPO1_S3_ENDPOINT: ${PGBACKREST_REPO1_S3_ENDPOINT:-s3.example.internal}
+      PGBACKREST_REPO1_S3_BUCKET: ${PGBACKREST_REPO1_S3_BUCKET:-vigilio-llmops-backups}
+      PGBACKREST_REPO1_S3_REGION: ${PGBACKREST_REPO1_S3_REGION:-us-east-1}
+      PGBACKREST_REPO1_S3_KEY: ${PGBACKREST_REPO1_S3_KEY:-disabled-until-configured}
+      PGBACKREST_BACKUP_INTERVAL_SECONDS: ${PGBACKREST_BACKUP_INTERVAL_SECONDS:-86400}
+    entrypoint: ["sh", "-ec"]
+    command:
+      - >-
+        export PGBACKREST_REPO1_CIPHER_PASS="$$(cat /run/secrets/pgbackrest_repo_key)";
+        export PGBACKREST_REPO1_S3_KEY_SECRET="$$(cat /run/secrets/pgbackrest_s3_secret)";
+        export PGPASSWORD="$$(cat /run/secrets/postgres_password)";
+        while true; do
+          pgbackrest --stanza="$${PGBACKREST_STANZA}" --config=/etc/pgbackrest/pgbackrest.conf check || true;
+          sleep "$${PGBACKREST_BACKUP_INTERVAL_SECONDS}";
+        done
+    secrets:
+      - postgres_password
+      - pgbackrest_repo_key
+      - pgbackrest_s3_secret
+    volumes:
+      - postgres_data:/var/lib/postgresql:ro
+      - ./pgbackrest/pgbackrest.conf:/etc/pgbackrest/pgbackrest.conf:ro
+      - pgbackrest_spool:/var/spool/pgbackrest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+      - egress
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  otel-collector:
+    image: ${OTEL_IMAGE:?OTEL_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    command: ["--config=/etc/otel/collector.yaml"]
+    volumes:
+      - ../observability/otel/collector.yaml:/etc/otel/collector.yaml:ro
+    networks:
+      observability:
+        aliases:
+          - otel
+      egress: {}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  alloy:
+    image: ${ALLOY_IMAGE:?ALLOY_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 256m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
+    volumes:
+      - ../observability/alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - alloy_data:/var/lib/alloy/data
+    networks:
+      - observability
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  tempo:
+    image: ${TEMPO_IMAGE:?TEMPO_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ../observability/tempo/tempo.yaml:/etc/tempo.yaml:ro
+      - tempo_data:/var/tempo
+    networks:
+      - observability
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  loki:
+    image: ${LOKI_IMAGE:?LOKI_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    command: ["-config.file=/etc/loki/local-config.yaml"]
+    volumes:
+      - ../observability/loki/local-config.yaml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    networks:
+      - observability
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  prometheus:
+    image: ${PROMETHEUS_IMAGE:?PROMETHEUS_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "65534:65534"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.75
+    mem_limit: 768m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    volumes:
+      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../observability/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prom_data:/prometheus
+    secrets:
+      - metrics_token
+    networks:
+      - observability
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9090/-/healthy"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  alertmanager:
+    image: ${ALERTMANAGER_IMAGE:?ALERTMANAGER_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "65534:65534"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.25
+    mem_limit: 256m
+    pids_limit: 64
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=16m
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--storage.path=/alertmanager"
+    volumes:
+      - ../observability/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/alertmanager
+    secrets:
+      - smtp_password
+    networks:
+      - observability
+      - egress
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9093/-/healthy"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  grafana:
+    image: ${GRAFANA_IMAGE:?GRAFANA_IMAGE required}
+    restart: unless-stopped
+    read_only: true
+    user: "472:0"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.50
+    mem_limit: 512m
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_password
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_SERVER_ROOT_URL: "${SITE_ORIGIN}/ops/grafana"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SECURITY_COOKIE_SECURE: "${SESSION_COOKIE_SECURE:-true}"
+      GF_SECURITY_COOKIE_SAMESITE: "strict"
+    secrets:
+      - grafana_password
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ../observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - reverse_proxy
+      - observability
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional local inference service. Enable via `--profile models` and provision models explicitly.
+  ollama:
+    image: ${OLLAMA_IMAGE:-ollama/ollama:0.12.5}
+    profiles:
+      - models
+    restart: unless-stopped
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 2.00
+    mem_limit: 4096m
+    pids_limit: 256
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+    volumes:
+      - ollama_data:/home/ollama/.ollama
+    environment:
+      HOME: /home/ollama
+    networks:
+      - backend
+
+  # Development-only SMTP sink. Never activate in staging or production.
+  mailpit:
+    image: ${MAILPIT_IMAGE:-axllent/mailpit:v1.27.8}
+    profiles:
+      - devtools
+    restart: unless-stopped
+    read_only: true
+    user: "10001:10001"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 0.25
+    mem_limit: 128m
+    pids_limit: 64
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=16m
+    ports:
+      - "127.0.0.1:8025:8025"
+    networks:
+      - backend
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password
+  database_url:
+    file: ./secrets/database_url
+  valkey_password:
+    file: ./secrets/valkey_password
+  nats_token:
+    file: ./secrets/nats_token
+  session_secret:
+    file: ./secrets/session_secret
+  encryption_key_b64:
+    file: ./secrets/encryption_key_b64
+  facebook_app_secret:
+    file: ./secrets/facebook_app_secret
+  smtp_password:
+    file: ./secrets/smtp_password
+  grafana_password:
+    file: ./secrets/grafana_password
+  metrics_token:
+    file: ./secrets/metrics_token
+  pgbackrest_repo_key:
+    file: ./secrets/pgbackrest_repo_key
+  pgbackrest_s3_secret:
+    file: ./secrets/pgbackrest_s3_secret
+
+networks:
+  edge:
+    driver: bridge
+  reverse_proxy:
+    driver: bridge
+    internal: true
+  backend:
+    driver: bridge
+    internal: true
+  observability:
+    driver: bridge
+    internal: true
+  egress:
+    driver: bridge
+    internal: false
+
+volumes:
+  postgres_data: {}
+  nats_data: {}
+  pgbackrest_spool: {}
+  alloy_data: {}
+  tempo_data: {}
+  loki_data: {}
+  prom_data: {}
+  alertmanager_data: {}
+  grafana_data: {}
+  caddy_data: {}
+  caddy_config: {}
+  ollama_data: {}

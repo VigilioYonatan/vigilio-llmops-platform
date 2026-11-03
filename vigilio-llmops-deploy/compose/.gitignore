@@ -1,0 +1,6 @@
+.env
+.env.*
+!.env.example
+secrets/*
+!secrets/README.md
+backups/**
