@@ -1,0 +1,56 @@
+---
+name: Deploy · Config, Observability & Supply-Chain Validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: YAML lint & ShellCheck
+        run: |
+          yamllint -c .yamllint.yaml compose/compose.yaml observability/ .forgejo/workflows/ci.yaml
+          shellcheck scripts/*.sh
+
+      - name: Caddyfile validation with deterministic SITE_ADDRESS
+        env:
+          SITE_ADDRESS: llmops.example.internal
+          GRAFANA_ALLOWED_CIDR: 127.0.0.1/32
+        run: |
+          caddy validate --config edge/Caddyfile --adapter caddyfile
+
+      - name: Prometheus config & alert rules validation
+        run: |
+          promtool check rules observability/prometheus/alerts.yml
+          promtool check config --syntax-only observability/prometheus/prometheus.yml
+
+      - name: Compose interpolation & OPA Conftest policy gate
+        run: |
+          conftest test compose/compose.yaml -p policies/
+          mkdir -p /tmp/vigilio-ci-secrets
+          cp -r compose /tmp/vigilio-ci-compose
+          cp compose/.env.example /tmp/vigilio-ci-compose/.env
+          for s in postgres_password database_url valkey_password nats_token session_secret \
+            encryption_key_b64 facebook_app_secret smtp_password grafana_password \
+            metrics_token pgbackrest_repo_key pgbackrest_s3_secret; do
+            printf 'ci-placeholder-do-not-use-in-prod\n' > "/tmp/vigilio-ci-compose/secrets/${s}"
+          done
+          docker compose --env-file /tmp/vigilio-ci-compose/.env -f /tmp/vigilio-ci-compose/compose.yaml config --quiet
+          rm -rf /tmp/vigilio-ci-compose /tmp/vigilio-ci-secrets
+
+      - name: Container IaC & secret scanning (Trivy + Gitleaks)
+        run: |
+          trivy config --exit-code 1 --severity HIGH,CRITICAL compose/compose.yaml
+          gitleaks detect --source . --no-git --exit-code 1

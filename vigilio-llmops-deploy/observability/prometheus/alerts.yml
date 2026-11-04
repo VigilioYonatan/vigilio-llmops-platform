@@ -1,0 +1,149 @@
+---
+groups:
+  - name: vigilio-llmops-slo-and-runtime
+    interval: 30s
+    rules:
+      - alert: VigilioApiDown
+        expr: up{job="vigilio-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: vigilio-api
+          component: api
+        annotations:
+          summary: "Vigilio LLMOps API scrape target is down"
+          description: "Prometheus cannot scrape api:3000/metrics for more than 2 minutes."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioOtelCollectorDown
+        expr: up{job="otel-collector"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: otel-collector
+          component: observability
+        annotations:
+          summary: "OpenTelemetry Collector unavailable"
+          description: "OTel Collector metrics endpoint (otel-collector:9464) has been unreachable for 2 minutes."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioApiHighErrorRate
+        expr: >-
+          (
+            sum(rate(vigilio_http_server_duration_milliseconds_count{http_response_status_code=~"5.."}[5m]))
+            /
+            clamp_min(sum(rate(vigilio_http_server_duration_milliseconds_count[5m])), 0.001)
+          ) > 0.02
+        for: 5m
+        labels:
+          severity: critical
+          service: vigilio-api
+          component: gateway
+        annotations:
+          summary: "Sustained Vigilio API 5xx error rate above 2% SLO"
+          description: "HTTP 5xx ratio exceeded 2% over 5 minutes; evaluate rollback in runbooks/rollback.md."
+          runbook_url: "runbooks/rollback.md"
+
+      - alert: VigilioApiHighLatencyP95
+        expr: >-
+          histogram_quantile(
+            0.95,
+            sum by (le) (rate(vigilio_http_server_duration_milliseconds_bucket[5m]))
+          ) > 1500
+        for: 5m
+        labels:
+          severity: warning
+          service: vigilio-api
+          component: gateway
+        annotations:
+          summary: "Vigilio API p95 latency above 1500ms"
+          description: "95th percentile HTTP server latency has exceeded 1500ms for 5 minutes."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioFinOpsBudgetExhaustionWarning
+        expr: max by (organization_id, workspace_id) (vigilio_finops_budget_utilization_ratio) >= 0.90
+        for: 5m
+        labels:
+          severity: warning
+          service: vigilio-api
+          component: finops
+        annotations:
+          summary: "Tenant FinOps LLM budget utilization above 90%"
+          description: "Workspace {{ $labels.workspace_id }} in organization {{ $labels.organization_id }} reached >= 90% budget."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioFinOpsBudgetExhausted
+        expr: >-
+          max by (organization_id, workspace_id) (vigilio_finops_budget_utilization_ratio) >= 1.0
+          or increase(vigilio_finops_budget_rejections_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: critical
+          service: vigilio-api
+          component: finops
+        annotations:
+          summary: "Tenant FinOps LLM budget exhausted or active reservation spikes rejected"
+          description: "Transactional FinOps guardrails are rejecting LLM gateway calls due to budget cap."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioOutboxBacklogHigh
+        expr: vigilio_outbox_pending_events > 250
+        for: 5m
+        labels:
+          severity: warning
+          service: vigilio-outbox
+          component: outbox
+        annotations:
+          summary: "Transactional Outbox pending events backlog elevated"
+          description: "Pending unpublished outbox events ({{ $value }}) exceeded 250 for 5 minutes."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioOutboxBacklogCritical
+        expr: vigilio_outbox_pending_events > 1000
+        for: 5m
+        labels:
+          severity: critical
+          service: vigilio-outbox
+          component: outbox
+        annotations:
+          summary: "Transactional Outbox backlog critical (> 1000 events)"
+          description: "Outbox publisher or NATS JetStream connectivity is degraded ({{ $value }} events queued)."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioDlqMessagesDetected
+        expr: vigilio_dlq_messages_total > 0 or increase(vigilio_outbox_dlq_events_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          service: vigilio-worker
+          component: async-dlq
+        annotations:
+          summary: "Dead-letter queue (DLQ) messages > 0"
+          description: "Poisoned or exhausted async jobs landed in DLQ; inspect worker logs and replay safely."
+          runbook_url: "runbooks/incident-response.md"
+
+      - alert: VigilioPostgresDown
+        expr: vigilio_postgres_up == 0 or (up{job="vigilio-api"} == 0 and absent(vigilio_process_uptime_seconds))
+        for: 1m
+        labels:
+          severity: critical
+          service: postgres
+          component: database
+        annotations:
+          summary: "PostgreSQL 18 + pgvector primary database unavailable"
+          description: "Database health probe is failing; assess host health and prepare PITR restore if needed."
+          runbook_url: "runbooks/restore.md"
+
+      - alert: VigilioBackupStale
+        expr: >-
+          (time() - vigilio_pgbackrest_last_successful_backup_timestamp_seconds) > 90000
+          or vigilio_pgbackrest_last_backup_status == 0
+        for: 15m
+        labels:
+          severity: critical
+          service: pgbackrest
+          component: backup-pitr
+        annotations:
+          summary: "Offsite pgBackRest backup is stale (> 25 hours) or failed"
+          description: "No verified encrypted S3 pgBackRest backup completed within the 25-hour RPO SLA window."
+          runbook_url: "runbooks/restore.md"

@@ -1,0 +1,21 @@
+# Environment & runtime credentials (never commit)
+compose/.env
+compose/.env.*
+!compose/.env.example
+compose/secrets/*
+!compose/secrets/README.md
+compose/backups/
+
+# Generated operational & DR drill evidence reports
+reports/*.json
+reports/*.log
+!reports/.gitkeep
+
+# Temporary / editor / OS files
+*.bak
+*.tmp
+*.swp
+*.pem
+*.key
+.DS_Store
+Thumbs.db

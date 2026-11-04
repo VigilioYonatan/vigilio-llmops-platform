@@ -1,0 +1,67 @@
+// Grafana Alloy structured OTLP log forwarder (rootless, zero container socket exposure)
+logging {
+  level  = "info"
+  format = "json"
+}
+
+otelcol.receiver.otlp "vigilio_logs" {
+  http {
+    endpoint = "0.0.0.0:4328"
+  }
+
+  output {
+    logs = [otelcol.processor.attributes.redact.input]
+  }
+}
+
+otelcol.processor.attributes "redact" {
+  action {
+    key    = "cookie"
+    action = "delete"
+  }
+  action {
+    key    = "set-cookie"
+    action = "delete"
+  }
+  action {
+    key    = "authorization"
+    action = "delete"
+  }
+  action {
+    key    = "x-api-key"
+    action = "delete"
+  }
+  action {
+    key    = "x-csrf-token"
+    action = "delete"
+  }
+  action {
+    key    = "gen_ai.prompt"
+    action = "delete"
+  }
+  action {
+    key    = "gen_ai.completion"
+    action = "delete"
+  }
+
+  output {
+    logs = [otelcol.processor.batch.default.input]
+  }
+}
+
+otelcol.processor.batch "default" {
+  timeout = "5s"
+
+  output {
+    logs = [otelcol.exporter.otlphttp.loki.input]
+  }
+}
+
+otelcol.exporter.otlphttp "loki" {
+  client {
+    endpoint = "http://loki:3100/otlp"
+    tls {
+      insecure = true
+    }
+  }
+}
