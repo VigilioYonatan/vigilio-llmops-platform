@@ -1,0 +1,30 @@
+---
+argument_specs:
+  main:
+    short_description: Reusable Cosign signature & SLSA v1.2 provenance verification role
+    options:
+      cosign_manage_binary:
+        type: bool
+        default: true
+      cosign_version:
+        type: str
+        default: "2.4.1"
+      cosign_install_path:
+        type: str
+        default: /usr/local/bin/cosign
+      cosign_certificate_oidc_issuer:
+        type: str
+        default: "https://token.actions.githubusercontent.com"
+      cosign_certificate_identity_regexp:
+        type: str
+        default: "^https://github\\.com/Vigilio-Services/.*$"
+      cosign_public_key_path:
+        type: str
+        default: ""
+      cosign_require_slsa_attestation:
+        type: bool
+        default: true
+      cosign_verify_images:
+        type: list
+        elements: str
+        default: []

@@ -1,0 +1,43 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: podman
+
+platforms:
+  - name: platform-ops-debian12
+    image: docker.io/geerlingguy/docker-debian12-ansible:latest
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      roles_path: ../../roles
+      interpreter_python: auto_silent
+  inventory:
+    host_vars:
+      platform-ops-debian12:
+        vigilio_operator_user: vigilio
+        vigilio_ssh_port: 2222
+        vigilio_allowed_ssh_cidr: "198.51.100.0/24"
+        vigilio_manage_firewall: false
+        vigilio_enable_linger: false
+        cosign_manage_binary: false
+        cosign_verify_images: []
+        pgbackrest_stanza: main
+        pgbackrest_repo_type: s3
+        pgbackrest_s3_endpoint: s3.backups.example.internal
+        pgbackrest_s3_bucket: pgbackrest-offsite
+        pgbackrest_enable_timers: false
+
+verifier:
+  name: ansible

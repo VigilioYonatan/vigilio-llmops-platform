@@ -1,0 +1,27 @@
+# Managed by platform-ops (pgbackrest_host) — Encrypted Offsite PITR Repository
+[global]
+repo1-type={{ pgbackrest_repo_type }}
+repo1-path={{ pgbackrest_repo_path }}
+{% if pgbackrest_repo_type == 's3' %}
+repo1-s3-endpoint={{ pgbackrest_s3_endpoint }}
+repo1-s3-bucket={{ pgbackrest_s3_bucket }}
+repo1-s3-region={{ pgbackrest_s3_region }}
+repo1-s3-uri-style=path
+repo1-s3-verify-tls=y
+{% endif %}
+repo1-cipher-type={{ pgbackrest_cipher_type }}
+repo1-retention-full={{ pgbackrest_retention_full }}
+repo1-retention-diff={{ pgbackrest_retention_diff }}
+compress-type=zst
+compress-level=3
+start-fast=y
+stop-auto=y
+delta=y
+archive-async=y
+spool-path=/var/spool/pgbackrest
+log-level-console=info
+
+[{{ pgbackrest_stanza }}]
+pg1-path={{ pgbackrest_pg_path }}
+pg1-port={{ pgbackrest_pg_port }}
+pg1-user={{ pgbackrest_pg_user }}

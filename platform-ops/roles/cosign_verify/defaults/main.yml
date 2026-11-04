@@ -1,0 +1,12 @@
+---
+cosign_manage_binary: true
+cosign_version: "2.4.1"
+cosign_binary_url: "https://github.com/sigstore/cosign/releases/download/v{{ cosign_version }}/cosign-linux-amd64"
+cosign_checksum_sha256: "8b92226d2e229a0f25bf4376d92c1cb9ea0bf13c1a2d2f0e9fa305bd177a9673"
+cosign_install_path: /usr/local/bin/cosign
+cosign_certificate_oidc_issuer: "https://token.actions.githubusercontent.com"
+cosign_certificate_identity_regexp: "^https://github\\.com/Vigilio-Services/.*$"
+cosign_public_key_path: ""
+cosign_require_slsa_attestation: true
+cosign_verify_images: []
+cosign_evidence_dir: /var/lib/platform-ops/supply-chain

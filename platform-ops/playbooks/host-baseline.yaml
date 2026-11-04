@@ -1,0 +1,9 @@
+---
+- name: Harden self-hosted Linux VPS nodes (baseline only)
+  hosts: vigilio_nodes
+  become: true
+  gather_facts: true
+  roles:
+    - role: ../roles/host_baseline
+      tags:
+        - baseline

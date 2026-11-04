@@ -1,0 +1,42 @@
+---
+argument_specs:
+  main:
+    short_description: Cloud-neutral hardened Linux baseline for Rootless Podman VPS nodes
+    options:
+      vigilio_operator_user:
+        type: str
+        required: true
+        description: Unprivileged OS user running rootless Podman workloads.
+      vigilio_ssh_port:
+        type: int
+        default: 2222
+        description: Hardened OpenSSH daemon TCP port.
+      vigilio_allowed_ssh_cidr:
+        type: str
+        required: true
+        description: Approved management/bastion CIDR allowed to reach vigilio_ssh_port.
+      vigilio_manage_firewall:
+        type: bool
+        default: false
+        description: Whether to manage UFW rules and enable default-deny incoming policy.
+      vigilio_subuid_start:
+        type: int
+        default: 100000
+      vigilio_subuid_count:
+        type: int
+        default: 65536
+      vigilio_unprivileged_port_start:
+        type: int
+        default: 80
+      vigilio_enable_linger:
+        type: bool
+        default: true
+      vigilio_configure_fail2ban:
+        type: bool
+        default: true
+      vigilio_configure_auditd:
+        type: bool
+        default: true
+      vigilio_configure_unattended_upgrades:
+        type: bool
+        default: true

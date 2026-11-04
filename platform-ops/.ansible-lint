@@ -1,0 +1,13 @@
+---
+profile: production
+
+exclude_paths:
+  - .cache/
+  - .molecule/
+  - .forgejo/
+
+warn_list:
+  - experimental
+
+skip_list:
+  - role-name[path]

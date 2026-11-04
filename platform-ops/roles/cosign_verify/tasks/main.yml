@@ -1,0 +1,90 @@
+---
+- name: Ensure supply-chain verification state directory exists
+  ansible.builtin.file:
+    path: "{{ cosign_evidence_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: Install pinned Cosign binary verified by SHA-256 checksum
+  ansible.builtin.get_url:
+    url: "{{ cosign_binary_url }}"
+    dest: "{{ cosign_install_path }}"
+    checksum: "sha256:{{ cosign_checksum_sha256 }}"
+    owner: root
+    group: root
+    mode: "0755"
+  when: cosign_manage_binary | bool
+
+- name: Assert every target OCI image uses an immutable @sha256 digest (fail-closed)
+  ansible.builtin.assert:
+    that:
+      - item is search('@sha256:[0-9a-f]{64}$')
+    fail_msg: "Mutable image tag rejected by supply-chain policy: {{ item }}"
+  loop: "{{ cosign_verify_images }}"
+
+- name: Verify Cosign keyless OIDC signatures on target digests
+  ansible.builtin.command:
+    argv:
+      - "{{ cosign_install_path }}"
+      - verify
+      - --certificate-oidc-issuer
+      - "{{ cosign_certificate_oidc_issuer }}"
+      - --certificate-identity-regexp
+      - "{{ cosign_certificate_identity_regexp }}"
+      - "{{ item }}"
+  loop: "{{ cosign_verify_images }}"
+  changed_when: false
+  when:
+    - (cosign_verify_images | length) > 0
+    - (cosign_public_key_path | length) == 0
+
+- name: Verify Cosign public-key signatures when offline/KMS key is configured
+  ansible.builtin.command:
+    argv:
+      - "{{ cosign_install_path }}"
+      - verify
+      - --key
+      - "{{ cosign_public_key_path }}"
+      - "{{ item }}"
+  loop: "{{ cosign_verify_images }}"
+  changed_when: false
+  when:
+    - (cosign_verify_images | length) > 0
+    - (cosign_public_key_path | length) > 0
+
+- name: Verify SLSA v1.2 provenance attestations on target digests
+  ansible.builtin.command:
+    argv:
+      - "{{ cosign_install_path }}"
+      - verify-attestation
+      - --type
+      - slsaprovenance
+      - --certificate-oidc-issuer
+      - "{{ cosign_certificate_oidc_issuer }}"
+      - --certificate-identity-regexp
+      - "{{ cosign_certificate_identity_regexp }}"
+      - "{{ item }}"
+  loop: "{{ cosign_verify_images }}"
+  changed_when: false
+  when:
+    - cosign_require_slsa_attestation | bool
+    - (cosign_verify_images | length) > 0
+    - (cosign_public_key_path | length) == 0
+
+- name: Record verified image digests receipt on host
+  ansible.builtin.copy:
+    dest: "{{ cosign_evidence_dir }}/cosign-verified.json"
+    owner: root
+    group: root
+    mode: "0600"
+    content: |
+      {{
+        {
+          'verified_images': cosign_verify_images,
+          'oidc_issuer': cosign_certificate_oidc_issuer,
+          'slsa_attestation_verified': (cosign_require_slsa_attestation | bool)
+        } | to_nice_json
+      }}
+  when: (cosign_verify_images | length) > 0

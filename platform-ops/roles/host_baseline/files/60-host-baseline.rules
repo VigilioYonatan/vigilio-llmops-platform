@@ -1,0 +1,11 @@
+# Managed by platform-ops (host_baseline) — Security Audit Rules
+-w /etc/ssh/sshd_config -p wa -k sshd_config_changes
+-w /etc/ssh/sshd_config.d -p wa -k sshd_config_changes
+-w /etc/passwd -p wa -k identity_changes
+-w /etc/group -p wa -k identity_changes
+-w /etc/shadow -p wa -k identity_changes
+-w /etc/sudoers -p wa -k sudoers_changes
+-w /etc/sudoers.d -p wa -k sudoers_changes
+-w /etc/subuid -p wa -k rootless_uidmap_changes
+-w /etc/subgid -p wa -k rootless_uidmap_changes
+-w /etc/pgbackrest -p wa -k backup_config_changes

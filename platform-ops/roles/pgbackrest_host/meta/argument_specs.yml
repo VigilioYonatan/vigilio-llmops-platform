@@ -1,0 +1,40 @@
+---
+argument_specs:
+  main:
+    short_description: Reusable host preparation and systemd timers for offsite encrypted pgBackRest PITR
+    options:
+      pgbackrest_operator_user:
+        type: str
+        default: vigilio
+      pgbackrest_stanza:
+        type: str
+        required: true
+      pgbackrest_repo_type:
+        type: str
+        choices: ["s3", "gcs", "azure", "posix"]
+        default: s3
+      pgbackrest_allow_non_offsite_lab:
+        type: bool
+        default: false
+      pgbackrest_s3_endpoint:
+        type: str
+        default: s3.backups.example.internal
+      pgbackrest_s3_bucket:
+        type: str
+        default: pgbackrest-offsite
+      pgbackrest_s3_region:
+        type: str
+        default: us-east-1
+      pgbackrest_cipher_type:
+        type: str
+        choices: ["aes-256-cbc"]
+        default: aes-256-cbc
+      pgbackrest_retention_full:
+        type: int
+        default: 4
+      pgbackrest_retention_diff:
+        type: int
+        default: 14
+      pgbackrest_enable_timers:
+        type: bool
+        default: true

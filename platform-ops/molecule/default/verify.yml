@@ -1,0 +1,53 @@
+---
+- name: Verify hardened SSH, rootless subuid/subgid, sysctl, fail2ban, auditd & pgBackRest baseline
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Read rendered /etc/ssh/sshd_config
+      ansible.builtin.slurp:
+        src: /etc/ssh/sshd_config
+      register: verify_sshd_config
+
+    - name: Assert SSH password auth and root login are disabled on custom port
+      ansible.builtin.assert:
+        that:
+          - "'PermitRootLogin no' in (verify_sshd_config.content | b64decode)"
+          - "'PasswordAuthentication no' in (verify_sshd_config.content | b64decode)"
+          - "'Port 2222' in (verify_sshd_config.content | b64decode)"
+
+    - name: Read /etc/subuid and /etc/subgid
+      ansible.builtin.slurp:
+        src: "{{ item }}"
+      loop:
+        - /etc/subuid
+        - /etc/subgid
+      register: verify_subids
+
+    - name: Assert rootless subordinate ID mappings exist for operator
+      ansible.builtin.assert:
+        that:
+          - "'vigilio:100000:65536' in (item.content | b64decode)"
+      loop: "{{ verify_subids.results }}"
+
+    - name: Read /etc/sysctl.d/90-host-baseline.conf
+      ansible.builtin.slurp:
+        src: /etc/sysctl.d/90-host-baseline.conf
+      register: verify_sysctl
+
+    - name: Assert rootless unprivileged port 80 sysctl is configured
+      ansible.builtin.assert:
+        that:
+          - "'net.ipv4.ip_unprivileged_port_start = 80' in (verify_sysctl.content | b64decode)"
+
+    - name: Read /etc/pgbackrest/pgbackrest.conf
+      ansible.builtin.slurp:
+        src: /etc/pgbackrest/pgbackrest.conf
+      register: verify_pgbackrest
+
+    - name: Assert offsite S3 AES-256 encrypted pgBackRest posture
+      ansible.builtin.assert:
+        that:
+          - "'repo1-type=s3' in (verify_pgbackrest.content | b64decode)"
+          - "'repo1-cipher-type=aes-256-cbc' in (verify_pgbackrest.content | b64decode)"

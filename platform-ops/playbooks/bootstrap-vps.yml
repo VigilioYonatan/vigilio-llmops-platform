@@ -1,0 +1,25 @@
+---
+- name: Bootstrap hardened self-hosted Linux VPS for Rootless Podman, Cosign & Offsite pgBackRest
+  hosts: vigilio_nodes
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: ../roles/host_baseline
+      tags:
+        - baseline
+        - ssh
+        - firewall
+        - podman
+
+    - role: ../roles/cosign_verify
+      tags:
+        - supply_chain
+        - cosign
+      when: cosign_verify_enabled | default(true) | bool
+
+    - role: ../roles/pgbackrest_host
+      tags:
+        - backup
+        - pgbackrest
+      when: pgbackrest_enabled | default(true) | bool

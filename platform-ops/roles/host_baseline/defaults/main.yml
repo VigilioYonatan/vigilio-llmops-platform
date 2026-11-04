@@ -1,0 +1,13 @@
+---
+vigilio_operator_user: vigilio
+vigilio_ssh_port: 2222
+vigilio_allowed_ssh_cidr: "0.0.0.0/0"  # MUST override with bastion CIDR when vigilio_manage_firewall=true
+vigilio_manage_firewall: false
+vigilio_subuid_start: 100000
+vigilio_subuid_count: 65536
+vigilio_unprivileged_port_start: 80
+vigilio_enable_linger: true
+vigilio_configure_fail2ban: true
+vigilio_configure_auditd: true
+vigilio_configure_unattended_upgrades: true
+vigilio_ssh_service_name: ssh

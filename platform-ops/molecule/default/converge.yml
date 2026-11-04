@@ -1,0 +1,10 @@
+---
+- name: Converge platform-ops roles in Molecule container
+  hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: ../../roles/host_baseline
+    - role: ../../roles/cosign_verify
+    - role: ../../roles/pgbackrest_host

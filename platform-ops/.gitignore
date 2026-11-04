@@ -1,0 +1,13 @@
+*.retry
+*.pyc
+__pycache__/
+.molecule/
+.cache/
+.ansible/
+vault-pass*
+*.pem
+*.key
+inventories/**/host_vars/*.secret.yml
+inventories/**/group_vars/*.secret.yml
+.DS_Store
+Thumbs.db

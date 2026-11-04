@@ -1,0 +1,206 @@
+---
+- name: Install baseline security packages and rootless Podman runtime
+  ansible.builtin.package:
+    name:
+      - podman
+      - uidmap
+      - slirp4netns
+      - fuse-overlayfs
+      - openssh-server
+      - acl
+      - chrony
+      - auditd
+      - fail2ban
+      - unattended-upgrades
+    state: present
+
+- name: Create unprivileged operator account for rootless workloads
+  ansible.builtin.user:
+    name: "{{ vigilio_operator_user }}"
+    shell: /bin/bash
+    create_home: true
+    groups: []
+    append: false
+
+- name: Ensure operator .ssh directory exists with 0700 permissions
+  ansible.builtin.file:
+    path: "/home/{{ vigilio_operator_user }}/.ssh"
+    state: directory
+    owner: "{{ vigilio_operator_user }}"
+    group: "{{ vigilio_operator_user }}"
+    mode: "0700"
+
+- name: Apply restrictive default umask 077 for operator account
+  ansible.builtin.lineinfile:
+    path: "/home/{{ vigilio_operator_user }}/.profile"
+    regexp: '^umask\s+'
+    line: "umask 077"
+    create: true
+    owner: "{{ vigilio_operator_user }}"
+    group: "{{ vigilio_operator_user }}"
+    mode: "0600"
+
+- name: Configure subordinate UID range (/etc/subuid) for rootless Podman
+  ansible.builtin.lineinfile:
+    path: /etc/subuid
+    regexp: "^{{ vigilio_operator_user }}:"
+    line: "{{ vigilio_operator_user }}:{{ vigilio_subuid_start }}:{{ vigilio_subuid_count }}"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Configure subordinate GID range (/etc/subgid) for rootless Podman
+  ansible.builtin.lineinfile:
+    path: /etc/subgid
+    regexp: "^{{ vigilio_operator_user }}:"
+    line: "{{ vigilio_operator_user }}:{{ vigilio_subuid_start }}:{{ vigilio_subuid_count }}"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Check systemd linger state for operator account
+  ansible.builtin.stat:
+    path: "/var/lib/systemd/linger/{{ vigilio_operator_user }}"
+  register: host_baseline_linger_stat
+
+- name: Enable systemd user linger so rootless containers survive logout
+  ansible.builtin.command:
+    cmd: "loginctl enable-linger {{ vigilio_operator_user }}"
+  when:
+    - vigilio_enable_linger | bool
+    - not host_baseline_linger_stat.stat.exists
+  changed_when: true
+
+- name: Configure sysctl hardening and unprivileged port 80 binding for rootless Caddy
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/90-host-baseline.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by platform-ops (host_baseline)
+      net.ipv4.ip_unprivileged_port_start = {{ vigilio_unprivileged_port_start }}
+      user.max_user_namespaces = 28633
+      fs.protected_hardlinks = 1
+      fs.protected_symlinks = 1
+      net.ipv4.conf.all.rp_filter = 1
+      net.ipv4.conf.default.rp_filter = 1
+      net.ipv4.tcp_syncookies = 1
+  notify: Apply sysctl settings
+
+- name: Ensure /run/sshd privilege separation directory exists before sshd -t validation
+  ansible.builtin.file:
+    path: /run/sshd
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Render hardened /etc/ssh/sshd_config with syntax validation
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0600"
+    validate: "/usr/sbin/sshd -t -f %s"
+  notify: Reload sshd
+
+- name: Require explicit management CIDR before enabling UFW
+  ansible.builtin.assert:
+    that:
+      - vigilio_allowed_ssh_cidr != '0.0.0.0/0'
+    fail_msg: "Set vigilio_allowed_ssh_cidr to an approved bastion/operator CIDR before enabling firewall."
+  when: vigilio_manage_firewall | bool
+
+- name: Install UFW when firewall management is enabled
+  ansible.builtin.package:
+    name: ufw
+    state: present
+  when: vigilio_manage_firewall | bool
+
+- name: Allow hardened SSH port from approved management CIDR BEFORE reloading SSH or enabling UFW
+  ansible.builtin.command:
+    cmd: "ufw allow from {{ vigilio_allowed_ssh_cidr }} to any port {{ vigilio_ssh_port }} proto tcp"
+  register: host_baseline_ufw_ssh
+  changed_when: "'Rule added' in host_baseline_ufw_ssh.stdout or 'Rule updated' in host_baseline_ufw_ssh.stdout"
+  when: vigilio_manage_firewall | bool
+
+- name: Flush SSH reload handler BEFORE enabling UFW and denying legacy port 22
+  ansible.builtin.meta: flush_handlers
+
+- name: Deny legacy SSH port 22/tcp when custom vigilio_ssh_port is active
+  ansible.builtin.command:
+    cmd: "ufw deny 22/tcp"
+  register: host_baseline_ufw_deny22
+  changed_when: "'Rule added' in host_baseline_ufw_deny22.stdout or 'Rule updated' in host_baseline_ufw_deny22.stdout"
+  when:
+    - vigilio_manage_firewall | bool
+    - (vigilio_ssh_port | int) != 22
+
+- name: Allow HTTP (80/tcp), HTTPS (443/tcp), and HTTP/3 QUIC (443/udp) ingress
+  ansible.builtin.command:
+    cmd: "ufw allow {{ item }}"
+  loop:
+    - "80/tcp"
+    - "443/tcp"
+    - "443/udp"
+  register: host_baseline_ufw_web
+  changed_when: "'Rule added' in host_baseline_ufw_web.stdout or 'Rule updated' in host_baseline_ufw_web.stdout"
+  when: vigilio_manage_firewall | bool
+
+- name: Inspect current UFW status
+  ansible.builtin.command:
+    cmd: "ufw status"
+  register: host_baseline_ufw_status
+  changed_when: false
+  check_mode: false
+  when: vigilio_manage_firewall | bool
+
+- name: Set UFW default incoming deny and enable firewall
+  ansible.builtin.command:
+    cmd: "{{ item }}"
+  loop:
+    - "ufw default deny incoming"
+    - "ufw default allow outgoing"
+    - "ufw --force enable"
+  changed_when: true
+  when:
+    - vigilio_manage_firewall | bool
+    - "'Status: active' not in host_baseline_ufw_status.stdout"
+
+- name: Configure fail2ban jail.local for hardened SSH daemon
+  ansible.builtin.template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart fail2ban
+  when: vigilio_configure_fail2ban | bool
+
+- name: Install auditd baseline monitoring rules
+  ansible.builtin.copy:
+    src: 60-host-baseline.rules
+    dest: /etc/audit/rules.d/60-host-baseline.rules
+    owner: root
+    group: root
+    mode: "0640"
+  notify: Reload auditd rules
+  when: vigilio_configure_auditd | bool
+
+- name: Enable unattended security upgrades on Debian/Ubuntu hosts
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+  when:
+    - vigilio_configure_unattended_upgrades | bool
+    - ansible_facts['os_family'] | default('Debian') == 'Debian'

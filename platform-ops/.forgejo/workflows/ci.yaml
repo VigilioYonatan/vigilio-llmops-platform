@@ -1,0 +1,40 @@
+---
+name: Platform-Ops · Ansible Syntax, Lint, Molecule & Secret Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Ansible playbook syntax check
+        run: |
+          ansible-playbook -i inventories/staging/hosts.ini playbooks/bootstrap-vps.yml --syntax-check
+          ansible-playbook -i inventories/production/hosts.ini playbooks/bootstrap-vps.yml --syntax-check
+          ansible-playbook -i localhost, molecule/default/converge.yml --syntax-check
+          ansible-playbook -i localhost, molecule/default/verify.yml --syntax-check
+
+      - name: Ansible-Lint & YAML validation
+        run: |
+          ansible-lint playbooks/ roles/ molecule/
+
+      - name: Secret scanning (Gitleaks)
+        run: |
+          gitleaks detect --source . --no-git --exit-code 1
+
+      - name: Molecule idempotence & verification suite (Podman driver)
+        if: env.CI_ENABLE_MOLECULE == 'true'
+        run: |
+          molecule test -s default

@@ -1,0 +1,122 @@
+---
+- name: Reject local-disk posix repository unless explicitly running an isolated test lab
+  ansible.builtin.assert:
+    that:
+      - pgbackrest_repo_type != 'posix' or (pgbackrest_allow_non_offsite_lab | bool)
+    fail_msg: "A local VPS disk is NEVER a backup. Use offsite s3/gcs/azure repository."
+
+- name: Install pgBackRest and PostgreSQL client tools
+  ansible.builtin.package:
+    name:
+      - pgbackrest
+      - postgresql-client
+    state: present
+
+- name: Create hardened pgBackRest configuration and spool directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: "{{ pgbackrest_operator_user }}"
+    mode: "0750"
+  loop:
+    - /etc/pgbackrest
+    - /etc/pgbackrest/conf.d
+    - /var/spool/pgbackrest
+    - /var/log/pgbackrest
+
+- name: Ensure owner-only secret environment file placeholder exists (/etc/pgbackrest/pgbackrest.env)
+  ansible.builtin.copy:
+    dest: /etc/pgbackrest/pgbackrest.env
+    owner: root
+    group: root
+    mode: "0600"
+    force: false
+    content: |
+      # Populate offsite credentials out-of-band (0600, never commit to Git):
+      # PGBACKREST_REPO1_CIPHER_PASS=
+      # PGBACKREST_REPO1_S3_KEY=
+      # PGBACKREST_REPO1_S3_KEY_SECRET=
+
+- name: Render encrypted offsite /etc/pgbackrest/pgbackrest.conf
+  ansible.builtin.template:
+    src: pgbackrest.conf.j2
+    dest: /etc/pgbackrest/pgbackrest.conf
+    owner: root
+    group: "{{ pgbackrest_operator_user }}"
+    mode: "0640"
+
+- name: Install systemd service template for scheduled pgBackRest backups
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/pgbackrest-backup@.service
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Offsite Encrypted pgBackRest Backup (%i) for stanza {{ pgbackrest_stanza }}
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=oneshot
+      EnvironmentFile=/etc/pgbackrest/pgbackrest.env
+      ExecStart=/usr/bin/pgbackrest --stanza={{ pgbackrest_stanza }} --type=%i backup
+      PrivateTmp=true
+      NoNewPrivileges=true
+      ProtectSystem=strict
+      ReadWritePaths=/var/spool/pgbackrest /var/log/pgbackrest
+  notify: Reload systemd daemon
+
+- name: Install systemd timer for weekly full offsite backup
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/pgbackrest-backup@full.timer
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Weekly Full Encrypted pgBackRest Backup Timer
+
+      [Timer]
+      OnCalendar={{ pgbackrest_full_oncalendar }}
+      Persistent=true
+      RandomizedDelaySec=15m
+
+      [Install]
+      WantedBy=timers.target
+  notify: Reload systemd daemon
+
+- name: Install systemd timer for daily differential offsite backup
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/pgbackrest-backup@diff.timer
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Daily Differential Encrypted pgBackRest Backup Timer
+
+      [Timer]
+      OnCalendar={{ pgbackrest_diff_oncalendar }}
+      Persistent=true
+      RandomizedDelaySec=10m
+
+      [Install]
+      WantedBy=timers.target
+  notify: Reload systemd daemon
+
+- name: Flush systemd daemon-reload before enabling backup timers
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable scheduled pgBackRest full and differential backup timers
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - pgbackrest-backup@full.timer
+    - pgbackrest-backup@diff.timer
+  when:
+    - pgbackrest_enable_timers | bool
+    - not ansible_check_mode

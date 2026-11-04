@@ -1,0 +1,18 @@
+---
+pgbackrest_operator_user: vigilio
+pgbackrest_stanza: main
+pgbackrest_pg_path: /var/lib/postgresql/18/docker
+pgbackrest_pg_port: 5432
+pgbackrest_pg_user: postgres
+pgbackrest_repo_type: s3
+pgbackrest_allow_non_offsite_lab: false
+pgbackrest_repo_path: /pgbackrest-backups
+pgbackrest_s3_endpoint: s3.backups.example.internal
+pgbackrest_s3_bucket: pgbackrest-offsite
+pgbackrest_s3_region: us-east-1
+pgbackrest_cipher_type: aes-256-cbc
+pgbackrest_retention_full: 4
+pgbackrest_retention_diff: 14
+pgbackrest_enable_timers: true
+pgbackrest_full_oncalendar: "Sun *-*-* 02:00:00"
+pgbackrest_diff_oncalendar: "Mon..Sat *-*-* 02:00:00"

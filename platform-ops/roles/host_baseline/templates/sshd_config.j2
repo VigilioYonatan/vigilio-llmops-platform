@@ -1,0 +1,28 @@
+# Managed by platform-ops (host_baseline) — DO NOT EDIT MANUALLY
+Include /etc/ssh/sshd_config.d/*.conf
+
+Port {{ vigilio_ssh_port }}
+Protocol 2
+
+PermitRootLogin no
+PasswordAuthentication no
+PermitEmptyPasswords no
+KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
+PubkeyAuthentication yes
+AuthenticationMethods publickey
+
+UsePAM yes
+X11Forwarding no
+AllowTcpForwarding no
+AllowAgentForwarding no
+PermitTunnel no
+PrintMotd no
+MaxAuthTries 3
+MaxSessions 4
+LoginGraceTime 30
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+AllowUsers {{ vigilio_operator_user }}
+Subsystem sftp /usr/lib/openssh/sftp-server

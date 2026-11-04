@@ -1,0 +1,12 @@
+# Managed by platform-ops (host_baseline)
+[DEFAULT]
+bantime = 1h
+findtime = 10m
+maxretry = 5
+backend = systemd
+
+[sshd]
+enabled = true
+port = {{ vigilio_ssh_port }}
+logpath = %(sshd_log)s
+mode = aggressive
