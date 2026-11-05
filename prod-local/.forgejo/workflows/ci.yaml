@@ -1,0 +1,33 @@
+---
+name: Prod-Local · Topology Anti-Fork & Lab Script Validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Ensure zero forked Compose or Caddy files exist in prod-local
+        run: |
+          found="$(find . -maxdepth 3 \( -iname '*compose*.yml' -o -iname '*compose*.yaml' -o -name 'Caddyfile' \))"
+          if [[ -n "${found}" ]]; then
+            printf 'FAIL: Forked topology file detected in prod-local:\n%s\n' "${found}" >&2
+            exit 1
+          fi
+
+      - name: ShellCheck & Secret Scan
+        run: |
+          shellcheck scripts/*.sh
+          gitleaks detect --source . --no-git --exit-code 1

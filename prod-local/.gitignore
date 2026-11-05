@@ -1,0 +1,10 @@
+.env
+.env.*
+reports/*.json
+reports/*.log
+*.tmp
+*.bak
+*.key
+*.pem
+.DS_Store
+Thumbs.db
