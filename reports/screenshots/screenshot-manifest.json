@@ -1,0 +1,572 @@
+{
+  "generatedAt": "2026-11-09T19:30:07.604Z",
+  "pages": [
+    {
+      "route": "/auth/login",
+      "title": "Iniciar sesión",
+      "screenshot": "01-auth_login.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 5,
+        "formsCount": 1,
+        "inputsCount": 4,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 2,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Calidad que puedes demostrar.",
+          "Bienvenido de nuevo"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/auth/register",
+      "title": "Crear cuenta",
+      "screenshot": "02-auth_register.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 3,
+        "formsCount": 1,
+        "inputsCount": 4,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 2,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Calidad que puedes demostrar.",
+          "Crear una cuenta"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/auth/forgot",
+      "title": "Recuperar contraseña",
+      "screenshot": "03-auth_forgot.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 2,
+        "formsCount": 1,
+        "inputsCount": 1,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 2,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Calidad que puedes demostrar.",
+          "Recuperar acceso"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/privacy/deletion-status",
+      "title": "Estado de Eliminación de Datos",
+      "screenshot": "04-privacy_deletion-status.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 1,
+        "formsCount": 1,
+        "inputsCount": 1,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 2,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Estado de eliminación de datos personales",
+          "Consultar código de confirmación",
+          "Introduce un código válido"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app",
+      "title": "Overview / Dashboard",
+      "screenshot": "05-app.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 27,
+        "formsCount": 0,
+        "inputsCount": 2,
+        "tablesCount": 2,
+        "tableRowsCount": 7,
+        "cardsCount": 8,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "El estado de tu IA, en un lugar.",
+          "Operaciones responsables, resultados medibles.",
+          "Actividad reciente",
+          "Release pipeline",
+          "Evaluaciones más recientes"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/applications",
+      "title": "Aplicaciones instrumentadas",
+      "screenshot": "06-app_applications.png",
+      "modalScreenshot": "06-app_applications-modal.png",
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 1,
+        "inputsCount": 4,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 5,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Aplicaciones instrumentadas",
+          "Registrar aplicación",
+          "Tus aplicaciones"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/traces",
+      "title": "Trace Explorer",
+      "screenshot": "07-app_traces.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 33,
+        "formsCount": 0,
+        "inputsCount": 3,
+        "tablesCount": 1,
+        "tableRowsCount": 5,
+        "cardsCount": 3,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Trace Explorer",
+          "Registros recientes"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/prompts",
+      "title": "Prompt Studio",
+      "screenshot": "08-app_prompts.png",
+      "modalScreenshot": "08-app_prompts-modal.png",
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 1,
+        "inputsCount": 4,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 5,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Prompts versionados",
+          "Nuevo prompt",
+          "Biblioteca"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/datasets",
+      "title": "Datasets de regresión",
+      "screenshot": "09-app_datasets.png",
+      "modalScreenshot": "09-app_datasets-modal.png",
+      "metrics": {
+        "buttonsCount": 25,
+        "formsCount": 1,
+        "inputsCount": 3,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 5,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Datasets de regresión",
+          "Nuevo dataset",
+          "Tus datasets"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/evaluations",
+      "title": "Evaluation Lab",
+      "screenshot": "10-app_evaluations.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 1,
+        "inputsCount": 5,
+        "tablesCount": 1,
+        "tableRowsCount": 2,
+        "cardsCount": 5,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Evaluation Lab",
+          "Nueva evaluación",
+          "Historial de ejecuciones"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/releases",
+      "title": "Release Center",
+      "screenshot": "11-app_releases.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 2,
+        "inputsCount": 8,
+        "tablesCount": 1,
+        "tableRowsCount": 1,
+        "cardsCount": 7,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Release Center",
+          "Quality policy",
+          "Nueva release",
+          "Pipeline de releases"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/budgets",
+      "title": "FinOps y presupuestos",
+      "screenshot": "12-app_budgets.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 29,
+        "formsCount": 1,
+        "inputsCount": 3,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 6,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "FinOps, Ledger y Presupuestos",
+          "Estado del presupuesto",
+          "Límite monetario del Tenant"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/models",
+      "title": "Model Registry & Routing",
+      "screenshot": "13-app_models.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 27,
+        "formsCount": 3,
+        "inputsCount": 10,
+        "tablesCount": 2,
+        "tableRowsCount": 6,
+        "cardsCount": 11,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Proveedores, modelos y routing",
+          "Registrar proveedor",
+          "Proveedores activos",
+          "Registrar modelo",
+          "Modelos disponibles"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/knowledge",
+      "title": "Knowledge y Hybrid RAG",
+      "screenshot": "14-app_knowledge.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 23,
+        "formsCount": 3,
+        "inputsCount": 8,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 9,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Knowledge y Hybrid RAG",
+          "Crear base documental",
+          "Agregar documento",
+          "Documentos indexados",
+          "Búsqueda Híbrida y RAG con citas"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/operations",
+      "title": "Alertas e Incidentes SRE",
+      "screenshot": "15-app_operations.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 2,
+        "inputsCount": 8,
+        "tablesCount": 2,
+        "tableRowsCount": 3,
+        "cardsCount": 11,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Alertas e incidentes",
+          "Nueva regla de alerta",
+          "Reglas configuradas",
+          "Alertas recientes",
+          "Registrar incidente"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/governance",
+      "title": "Gobierno y Auditoría",
+      "screenshot": "16-app_governance.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 25,
+        "formsCount": 0,
+        "inputsCount": 4,
+        "tablesCount": 1,
+        "tableRowsCount": 4,
+        "cardsCount": 7,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Auditoría y privacidad",
+          "Bitácora de seguridad y cambios",
+          "Ejercicio de derechos",
+          "Consultar solicitud"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/quality",
+      "title": "Quality Lab",
+      "screenshot": "17-app_quality.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 2,
+        "inputsCount": 6,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 7,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Evaluadores y comparaciones",
+          "Crear evaluador",
+          "Evaluadores del workspace",
+          "Comparación de ejecuciones"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/team",
+      "title": "Equipo y permisos IAM",
+      "screenshot": "18-app_team.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 29,
+        "formsCount": 1,
+        "inputsCount": 10,
+        "tablesCount": 1,
+        "tableRowsCount": 6,
+        "cardsCount": 5,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Equipo y permisos",
+          "Agregar usuario existente",
+          "Miembros activos"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/invitations",
+      "title": "Invitaciones y acceso",
+      "screenshot": "19-app_invitations.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 26,
+        "formsCount": 3,
+        "inputsCount": 7,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 7,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Invitaciones y acceso",
+          "Invitar integrante",
+          "Aceptar invitación",
+          "Revocar invitación"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/settings",
+      "title": "Configuración de organización",
+      "screenshot": "20-app_settings.png",
+      "modalScreenshot": "20-app_settings-modal.png",
+      "metrics": {
+        "buttonsCount": 30,
+        "formsCount": 3,
+        "inputsCount": 7,
+        "tablesCount": 1,
+        "tableRowsCount": 6,
+        "cardsCount": 13,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Organizaciones y espacios de trabajo",
+          "Nueva organización",
+          "Nuevo workspace",
+          "Tus organizaciones",
+          "Workspaces disponibles"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/account",
+      "title": "Mi cuenta y seguridad",
+      "screenshot": "21-app_account.png",
+      "modalScreenshot": "21-app_account-modal.png",
+      "metrics": {
+        "buttonsCount": 63,
+        "formsCount": 5,
+        "inputsCount": 9,
+        "tablesCount": 1,
+        "tableRowsCount": 36,
+        "cardsCount": 15,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Mi cuenta y seguridad",
+          "Perfil",
+          "Autenticación de dos factores",
+          "Cambiar contraseña",
+          "Cambiar email"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/onboarding",
+      "title": "Onboarding Wizard",
+      "screenshot": "22-app_onboarding.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 23,
+        "formsCount": 0,
+        "inputsCount": 2,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 6,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "Asistente de puesta en marcha",
+          "Progreso de configuración",
+          "Activación final",
+          "¡Plataforma inicializada!"
+        ]
+      },
+      "status": "CAPTURED"
+    },
+    {
+      "route": "/app/playground",
+      "title": "AI Gateway & Playground",
+      "screenshot": "23-app_playground.png",
+      "modalScreenshot": null,
+      "metrics": {
+        "buttonsCount": 23,
+        "formsCount": 3,
+        "inputsCount": 9,
+        "tablesCount": 0,
+        "tableRowsCount": 0,
+        "cardsCount": 9,
+        "skeletonsCount": 0,
+        "alertsCount": 0,
+        "modalsCount": 0,
+        "hasHorizontalOverflow": false,
+        "headings": [
+          "AI Gateway & Prompt Lab",
+          "Consola de ejecución",
+          "Respuesta del modelo",
+          "Sin ejecución reciente",
+          "Comparador Diff entre versiones"
+        ]
+      },
+      "status": "CAPTURED"
+    }
+  ]
+}

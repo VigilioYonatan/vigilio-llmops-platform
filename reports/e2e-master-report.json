@@ -1,0 +1,54 @@
+{
+  "startedAt": "2026-11-09T23:02:11.614Z",
+  "gates": [
+    {
+      "name": "Auth & Tenant Context",
+      "status": "PASS",
+      "details": "Authenticated as admin@vigilio.io (Role: owner, Avatar: \"AD\"). Brand: \"VIGILIO\nLLMOPS PLATFORM\".",
+      "timestamp": "2026-11-09T23:02:13.520Z"
+    },
+    {
+      "name": "Applications & API Key",
+      "status": "PASS",
+      "details": "App 'E2E-App-1794265331269' (ID: 71584ded-afb9-4a13-a9c1-cc275023e4a5) created. Key generated (vgl_UI5zsH5p••••). DB token_hash verified as 64-char SHA-256 (Plaintext never stored in DB).",
+      "timestamp": "2026-11-09T23:02:18.220Z"
+    },
+    {
+      "name": "Prompt Studio Versioning",
+      "status": "PASS",
+      "details": "Prompt 'e2e-prompt-1794265331269' (ID: ba8fcd00-7a95-41d1-8bda-6b6f07ebbfcc) created with immutable v1 (Model: llama3.2:1b, SHA: 28fd509710...).",
+      "timestamp": "2026-11-09T23:02:23.226Z"
+    },
+    {
+      "name": "FinOps Transactional Integrity",
+      "status": "PASS",
+      "details": "Budget policy limit updated to $225.00 USD in PostgreSQL. Active ledger entries: 8. Zero UI errors.",
+      "timestamp": "2026-11-09T23:02:26.248Z"
+    },
+    {
+      "name": "Regression Datasets & Cases",
+      "status": "PASS",
+      "details": "Dataset 'e2e-dataset-1794265331269' (ID: 7c2e9bbd-a8e5-4b44-97ad-0895cfba2bfb) and test case verified in PostgreSQL.",
+      "timestamp": "2026-11-09T23:02:32.721Z"
+    },
+    {
+      "name": "Playground & Gateway UI",
+      "status": "PASS",
+      "details": "Playground loaded with 4 prompts in library. Shortcut verified: \"Ctrl+↵\".",
+      "timestamp": "2026-11-09T23:02:34.238Z"
+    },
+    {
+      "name": "Governance & Audit Integrity",
+      "status": "PASS",
+      "details": "Audit log UI rendered 30 events. PostgreSQL audit_events verified: 30 total logged actions.",
+      "timestamp": "2026-11-09T23:02:35.731Z"
+    },
+    {
+      "name": "Database Hygiene & Teardown",
+      "status": "PASS",
+      "details": "Safely purged test dataset (7c2e9bbd-a8e5-4b44-97ad-0895cfba2bfb), prompt (ba8fcd00-7a95-41d1-8bda-6b6f07ebbfcc), app (71584ded-afb9-4a13-a9c1-cc275023e4a5), and restored budget policy to 250.00 USD.",
+      "timestamp": "2026-11-09T23:02:35.750Z"
+    }
+  ],
+  "finishedAt": "2026-11-09T23:02:35.856Z"
+}

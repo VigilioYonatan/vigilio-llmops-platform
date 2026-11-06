@@ -1,0 +1,2031 @@
+{
+  "total": 202,
+  "passed": 202,
+  "count2xx": 18,
+  "count4xx": 182,
+  "count503": 2,
+  "count500": 0,
+  "averageLatencyMs": 3.98,
+  "results": [
+    {
+      "path": "/api/v1/alert-rules",
+      "method": "POST",
+      "operationId": "AlertRulesController_create",
+      "tag": "AlertRules",
+      "status": 400,
+      "latencyMs": 7.82,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/alert-rules",
+      "method": "GET",
+      "operationId": "AlertRulesController_list",
+      "tag": "AlertRules",
+      "status": 400,
+      "latencyMs": 6.02,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/alert-rules/534ccab7-f87d-41ed-b064-d83ec3012877",
+      "method": "PATCH",
+      "operationId": "AlertRulesController_patch",
+      "tag": "AlertRules",
+      "status": 400,
+      "latencyMs": 4.89,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/alerts",
+      "method": "GET",
+      "operationId": "AlertsController_list",
+      "tag": "Alerts",
+      "status": 400,
+      "latencyMs": 6.46,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/alerts/fcdaf03c-8db6-417e-8d24-0cf9ce7647e2/acknowledge",
+      "method": "POST",
+      "operationId": "AlertsController_ack",
+      "tag": "Alerts",
+      "status": 404,
+      "latencyMs": 7.43,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications",
+      "method": "POST",
+      "operationId": "ApplicationsController_create",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 4.18,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications",
+      "method": "GET",
+      "operationId": "ApplicationsController_list",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 4.71,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "ApplicationsController_get",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 8.21,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "PATCH",
+      "operationId": "ApplicationsController_patch",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 4.99,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/environments",
+      "method": "POST",
+      "operationId": "ApplicationsController_addEnvironment",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 5.33,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/environments",
+      "method": "GET",
+      "operationId": "ApplicationsController_environments",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 8.44,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/keys",
+      "method": "POST",
+      "operationId": "ApplicationsController_key",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 5.06,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/keys",
+      "method": "GET",
+      "operationId": "ApplicationsController_keys",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 9.96,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/keys/f4a5be99-b52f-4969-9e8e-1a113378d28e",
+      "method": "DELETE",
+      "operationId": "ApplicationsController_revoke",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 13.89,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/sdk-credentials",
+      "method": "POST",
+      "operationId": "ApplicationsController_sdkKey",
+      "tag": "Applications",
+      "status": 400,
+      "latencyMs": 5.59,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/sdk-credentials",
+      "method": "GET",
+      "operationId": "ApplicationsController_sdkKeys",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 6.51,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/sdk-credentials/9df03aaa-476e-42dd-aec6-779f548422e7",
+      "method": "DELETE",
+      "operationId": "ApplicationsController_revokeSdkKey",
+      "tag": "Applications",
+      "status": 404,
+      "latencyMs": 9.49,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/sdk-credentials/9df03aaa-476e-42dd-aec6-779f548422e7/rotate",
+      "method": "POST",
+      "operationId": "ApplicationsController_rotateSdkKey",
+      "tag": "Applications",
+      "status": 404,
+      "latencyMs": 12.52,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/summary",
+      "method": "GET",
+      "operationId": "ApplicationsController_summary",
+      "tag": "Applications",
+      "status": 200,
+      "latencyMs": 8.76,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/datasets",
+      "method": "POST",
+      "operationId": "AppDatasetsController_dataset",
+      "tag": "AppDatasets",
+      "status": 400,
+      "latencyMs": 6.64,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/datasets",
+      "method": "GET",
+      "operationId": "AppDatasetsController_datasets",
+      "tag": "AppDatasets",
+      "status": 200,
+      "latencyMs": 9.96,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/errors",
+      "method": "GET",
+      "operationId": "ApplicationTelemetryController_errors",
+      "tag": "ApplicationTelemetry",
+      "status": 200,
+      "latencyMs": 12.54,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/prompts",
+      "method": "POST",
+      "operationId": "AppPromptsController_prompt",
+      "tag": "AppPrompts",
+      "status": 400,
+      "latencyMs": 6.83,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/prompts",
+      "method": "GET",
+      "operationId": "AppPromptsController_prompts",
+      "tag": "AppPrompts",
+      "status": 200,
+      "latencyMs": 9.06,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/applications/f7bd85fc-0e4c-4d9c-b342-804062846adf/timeseries",
+      "method": "GET",
+      "operationId": "ApplicationTelemetryController_timeseries",
+      "tag": "ApplicationTelemetry",
+      "status": 200,
+      "latencyMs": 9.23,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/audit-events",
+      "method": "GET",
+      "operationId": "AuditEventsController_list",
+      "tag": "AuditEvents",
+      "status": 400,
+      "latencyMs": 3.5,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/audit-events/3e5a7cd9-900f-4815-8dc8-5b47889ebe8e",
+      "method": "GET",
+      "operationId": "AuditEventsController_detail",
+      "tag": "AuditEvents",
+      "status": 400,
+      "latencyMs": 3.96,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/csrf",
+      "method": "GET",
+      "operationId": "AuthController_csrf",
+      "tag": "Auth",
+      "status": 200,
+      "latencyMs": 3.02,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/email/resend",
+      "method": "POST",
+      "operationId": "AuthController_resend",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 2.54,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/email/verify",
+      "method": "POST",
+      "operationId": "AuthController_verify",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 3.48,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/facebook/callback",
+      "method": "GET",
+      "operationId": "FacebookAuthController_callback",
+      "tag": "FacebookAuth",
+      "status": 503,
+      "latencyMs": 3,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/facebook/data-deletion",
+      "method": "POST",
+      "operationId": "FacebookAuthController_delete",
+      "tag": "FacebookAuth",
+      "status": 400,
+      "latencyMs": 3.01,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/facebook/start",
+      "method": "GET",
+      "operationId": "FacebookAuthController_start",
+      "tag": "FacebookAuth",
+      "status": 503,
+      "latencyMs": 2.63,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/login",
+      "method": "POST",
+      "operationId": "AuthController_login",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 3.72,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/logout",
+      "method": "POST",
+      "operationId": "AuthController_logout",
+      "tag": "Auth",
+      "status": 200,
+      "latencyMs": 7.43,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/logout-all",
+      "method": "POST",
+      "operationId": "AuthController_logoutAll",
+      "tag": "Auth",
+      "status": 401,
+      "latencyMs": 5.01,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/mfa/complete",
+      "method": "POST",
+      "operationId": "AuthController_mfaComplete",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 3.98,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/password/forgot",
+      "method": "POST",
+      "operationId": "AuthController_forgot",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 2.44,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/password/reset",
+      "method": "POST",
+      "operationId": "AuthController_reset",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 2.31,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/refresh",
+      "method": "POST",
+      "operationId": "AuthController_refresh",
+      "tag": "Auth",
+      "status": 401,
+      "latencyMs": 8.23,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/auth/register",
+      "method": "POST",
+      "operationId": "AuthController_register",
+      "tag": "Auth",
+      "status": 400,
+      "latencyMs": 1.76,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budget-policies",
+      "method": "POST",
+      "operationId": "BudgetPoliciesController_create",
+      "tag": "BudgetPolicies",
+      "status": 401,
+      "latencyMs": 2.75,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budget-policies",
+      "method": "GET",
+      "operationId": "BudgetPoliciesController_list",
+      "tag": "BudgetPolicies",
+      "status": 401,
+      "latencyMs": 3.47,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budget-policies/4b815dc4-24aa-4c5c-b5b0-99abe2492674",
+      "method": "PATCH",
+      "operationId": "BudgetPoliciesController_patch",
+      "tag": "BudgetPolicies",
+      "status": 401,
+      "latencyMs": 4.96,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budget-policies/4b815dc4-24aa-4c5c-b5b0-99abe2492674/simulate",
+      "method": "POST",
+      "operationId": "BudgetPoliciesController_simulate",
+      "tag": "BudgetPolicies",
+      "status": 401,
+      "latencyMs": 5.5,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budgets",
+      "method": "POST",
+      "operationId": "BudgetsController_upsert",
+      "tag": "Budgets",
+      "status": 401,
+      "latencyMs": 5.66,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/budgets",
+      "method": "GET",
+      "operationId": "BudgetsController_get",
+      "tag": "Budgets",
+      "status": 401,
+      "latencyMs": 4.95,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/ledger",
+      "method": "GET",
+      "operationId": "CostsController_ledger",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 5.02,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/overview",
+      "method": "GET",
+      "operationId": "CostsController_overview",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 5.13,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/price-cards",
+      "method": "POST",
+      "operationId": "CostsController_card",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 3.12,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/price-cards",
+      "method": "GET",
+      "operationId": "CostsController_cards",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 3.24,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/reconciliations",
+      "method": "POST",
+      "operationId": "CostsController_reconcile",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 3.14,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/costs/usage",
+      "method": "GET",
+      "operationId": "CostsController_usage",
+      "tag": "Costs",
+      "status": 401,
+      "latencyMs": 2.59,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/data-requests",
+      "method": "GET",
+      "operationId": "DataRequestsController_list",
+      "tag": "DataRequests",
+      "status": 401,
+      "latencyMs": 2.22,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/data-requests/delete",
+      "method": "POST",
+      "operationId": "DataRequestsController_delete",
+      "tag": "DataRequests",
+      "status": 401,
+      "latencyMs": 3.26,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/data-requests/export",
+      "method": "POST",
+      "operationId": "DataRequestsController_export",
+      "tag": "DataRequests",
+      "status": 401,
+      "latencyMs": 2.51,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/data-requests/{request_id}",
+      "method": "GET",
+      "operationId": "DataRequestsController_status",
+      "tag": "DataRequests",
+      "status": 401,
+      "latencyMs": 3.09,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/dataset-imports/{import_id}",
+      "method": "GET",
+      "operationId": "DatasetImportStatusController_get",
+      "tag": "DatasetImportStatus",
+      "status": 401,
+      "latencyMs": 3.33,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets",
+      "method": "POST",
+      "operationId": "DatasetsController_create",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 3.82,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets",
+      "method": "GET",
+      "operationId": "DatasetsController_list",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 3.68,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/ca00fdb6-b1d3-44a2-99ef-8f71cf683050/draft/cases/42f0a6cf-5fdc-47c2-b673-ded900b9de0e",
+      "method": "PATCH",
+      "operationId": "DatasetsController_patch",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 4.67,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/ca00fdb6-b1d3-44a2-99ef-8f71cf683050/imports",
+      "method": "POST",
+      "operationId": "DatasetsController_imports",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 5.26,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/ca00fdb6-b1d3-44a2-99ef-8f71cf683050/versions",
+      "method": "POST",
+      "operationId": "DatasetsController_freeze",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 4.03,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/ca00fdb6-b1d3-44a2-99ef-8f71cf683050/versions",
+      "method": "GET",
+      "operationId": "DatasetsController_versions",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 3.94,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/ca00fdb6-b1d3-44a2-99ef-8f71cf683050/versions/60373d72-97b8-4fe6-af53-28c1644d7144/cases",
+      "method": "GET",
+      "operationId": "DatasetsController_snapshot",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 3.47,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "DatasetsController_get",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 4.74,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf/cases",
+      "method": "GET",
+      "operationId": "DatasetsController_cases",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 5.55,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf/cases",
+      "method": "POST",
+      "operationId": "DatasetsController_addCase",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 5.35,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf/cases/42f0a6cf-5fdc-47c2-b673-ded900b9de0e",
+      "method": "DELETE",
+      "operationId": "DatasetsController_removeCase",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 5.02,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf/draft/cases",
+      "method": "POST",
+      "operationId": "DatasetsController_draftAdd",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 4.32,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/datasets/f7bd85fc-0e4c-4d9c-b342-804062846adf/draft/cases/42f0a6cf-5fdc-47c2-b673-ded900b9de0e",
+      "method": "DELETE",
+      "operationId": "DatasetsController_draftRemove",
+      "tag": "Datasets",
+      "status": 401,
+      "latencyMs": 3.3,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-comparisons",
+      "method": "POST",
+      "operationId": "EvaluationComparisonsController_create",
+      "tag": "EvaluationComparisons",
+      "status": 401,
+      "latencyMs": 3.75,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-comparisons",
+      "method": "GET",
+      "operationId": "EvaluationComparisonsController_list",
+      "tag": "EvaluationComparisons",
+      "status": 401,
+      "latencyMs": 3.33,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-comparisons/{comparison_id}",
+      "method": "GET",
+      "operationId": "EvaluationComparisonsController_detail",
+      "tag": "EvaluationComparisons",
+      "status": 401,
+      "latencyMs": 3.36,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs",
+      "method": "POST",
+      "operationId": "EvaluationsController_create",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 5.09,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs",
+      "method": "GET",
+      "operationId": "EvaluationsController_list",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 3.75,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "EvaluationsController_get",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 4.25,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/annotations",
+      "method": "POST",
+      "operationId": "EvaluationsController_annotate",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 5.15,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/annotations",
+      "method": "GET",
+      "operationId": "EvaluationsController_annotations",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 3.87,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/cancel",
+      "method": "POST",
+      "operationId": "EvaluationsController_cancel",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 2.84,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/cases",
+      "method": "GET",
+      "operationId": "EvaluationsController_cases",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 2.3,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/export",
+      "method": "POST",
+      "operationId": "EvaluationsController_exportRun",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 2.05,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/metrics",
+      "method": "GET",
+      "operationId": "EvaluationsController_metrics",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 2.54,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluation-runs/f7bd85fc-0e4c-4d9c-b342-804062846adf/results",
+      "method": "GET",
+      "operationId": "EvaluationsController_results",
+      "tag": "Evaluations",
+      "status": 401,
+      "latencyMs": 1.97,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluators",
+      "method": "POST",
+      "operationId": "EvaluatorsController_create",
+      "tag": "Evaluators",
+      "status": 401,
+      "latencyMs": 2.59,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluators",
+      "method": "GET",
+      "operationId": "EvaluatorsController_list",
+      "tag": "Evaluators",
+      "status": 401,
+      "latencyMs": 1.86,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluators/{evaluator_id}/calibrations",
+      "method": "POST",
+      "operationId": "EvaluatorsController_calibration",
+      "tag": "Evaluators",
+      "status": 401,
+      "latencyMs": 3.14,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluators/{evaluator_id}/versions",
+      "method": "POST",
+      "operationId": "EvaluatorsController_version",
+      "tag": "Evaluators",
+      "status": 401,
+      "latencyMs": 2.89,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/evaluators/{evaluator_id}/versions",
+      "method": "GET",
+      "operationId": "EvaluatorsController_versions",
+      "tag": "Evaluators",
+      "status": 401,
+      "latencyMs": 2.5,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/gateway/generate",
+      "method": "POST",
+      "operationId": "GatewayController_generate",
+      "tag": "Gateway",
+      "status": 401,
+      "latencyMs": 1.72,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/gateway/requests/{request_id}",
+      "method": "GET",
+      "operationId": "GatewayRequestsController_status",
+      "tag": "GatewayRequests",
+      "status": 401,
+      "latencyMs": 1.36,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents",
+      "method": "POST",
+      "operationId": "IncidentsController_create",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 3.53,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents",
+      "method": "GET",
+      "operationId": "IncidentsController_list",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 2.97,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents/28bf613b-75cd-4aae-abab-ae7a90d28745",
+      "method": "GET",
+      "operationId": "IncidentsController_get",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 2.95,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents/28bf613b-75cd-4aae-abab-ae7a90d28745/events",
+      "method": "POST",
+      "operationId": "IncidentsController_event",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 4.25,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents/28bf613b-75cd-4aae-abab-ae7a90d28745/regressions",
+      "method": "POST",
+      "operationId": "IncidentsController_regression",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 4.43,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/incidents/28bf613b-75cd-4aae-abab-ae7a90d28745/resolve",
+      "method": "POST",
+      "operationId": "IncidentsController_resolve",
+      "tag": "Incidents",
+      "status": 401,
+      "latencyMs": 4.51,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/ingest/traces",
+      "method": "POST",
+      "operationId": "TraceIngestController_ingest",
+      "tag": "TraceIngest",
+      "status": 401,
+      "latencyMs": 2.1,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/invitations/{invitation_id}/accept",
+      "method": "POST",
+      "operationId": "InvitationsController_accept",
+      "tag": "Invitations",
+      "status": 401,
+      "latencyMs": 4.26,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases",
+      "method": "GET",
+      "operationId": "KnowledgeController_list",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 4.36,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases",
+      "method": "POST",
+      "operationId": "KnowledgeController_create",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 4.81,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/answer",
+      "method": "POST",
+      "operationId": "KnowledgeController_answer",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 5,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/documents",
+      "method": "POST",
+      "operationId": "KnowledgeController_doc",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 4.54,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/documents",
+      "method": "GET",
+      "operationId": "KnowledgeController_docs",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 6.43,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/documents/e29024a3-f8b1-4b5c-8d6e-b47147e4a81f/acl",
+      "method": "PATCH",
+      "operationId": "KnowledgeController_acl",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 5.39,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/jobs/{job_id}",
+      "method": "GET",
+      "operationId": "KnowledgeController_job",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 5.49,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/reindex",
+      "method": "POST",
+      "operationId": "KnowledgeController_reindex",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 4.05,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/knowledge-bases/b307728d-61ca-4df9-8f45-b7d774f3f774/search",
+      "method": "POST",
+      "operationId": "KnowledgeController_search",
+      "tag": "Knowledge",
+      "status": 401,
+      "latencyMs": 4.13,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me",
+      "method": "GET",
+      "operationId": "MeController_me",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 2.61,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me",
+      "method": "PATCH",
+      "operationId": "MeController_patch",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.36,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/email",
+      "method": "PATCH",
+      "operationId": "MeController_changeEmail",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 5.25,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/email/verify-change",
+      "method": "POST",
+      "operationId": "MeController_verifyEmailChange",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.38,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/identities",
+      "method": "GET",
+      "operationId": "LinkedIdentityController_list",
+      "tag": "LinkedIdentity",
+      "status": 401,
+      "latencyMs": 3.15,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/identities/facebook",
+      "method": "DELETE",
+      "operationId": "LinkedIdentityController_unlink",
+      "tag": "LinkedIdentity",
+      "status": 401,
+      "latencyMs": 3.22,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/identities/facebook/link",
+      "method": "POST",
+      "operationId": "LinkedIdentityController_link",
+      "tag": "LinkedIdentity",
+      "status": 401,
+      "latencyMs": 5.08,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/mfa/recovery-codes/rotate",
+      "method": "POST",
+      "operationId": "MeController_rotateCodes",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 5.08,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/mfa/step-up",
+      "method": "POST",
+      "operationId": "MeController_mfaStepUp",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 4.88,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/mfa/totp/disable",
+      "method": "POST",
+      "operationId": "MeController_disableMfa",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 4.74,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/mfa/totp/setup",
+      "method": "POST",
+      "operationId": "MeController_mfaSetup",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 2.96,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/mfa/totp/verify",
+      "method": "POST",
+      "operationId": "MeController_mfaVerify",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.41,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/password/change",
+      "method": "POST",
+      "operationId": "MeController_changePassword",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.56,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/sessions",
+      "method": "GET",
+      "operationId": "MeController_sessions",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.26,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/me/sessions/{session_id}",
+      "method": "DELETE",
+      "operationId": "MeController_revoke",
+      "tag": "Me",
+      "status": 401,
+      "latencyMs": 3.84,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/model-routes",
+      "method": "POST",
+      "operationId": "ModelRoutesController_create",
+      "tag": "ModelRoutes",
+      "status": 401,
+      "latencyMs": 3.13,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/model-routes",
+      "method": "GET",
+      "operationId": "ModelRoutesController_list",
+      "tag": "ModelRoutes",
+      "status": 401,
+      "latencyMs": 2.69,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/model-routes/{route_id}",
+      "method": "PATCH",
+      "operationId": "ModelRoutesController_update",
+      "tag": "ModelRoutes",
+      "status": 401,
+      "latencyMs": 3.89,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/model-routes/{route_id}/validate",
+      "method": "POST",
+      "operationId": "ModelRoutesController_validate",
+      "tag": "ModelRoutes",
+      "status": 401,
+      "latencyMs": 4.41,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/models",
+      "method": "GET",
+      "operationId": "ModelsController_list",
+      "tag": "Models",
+      "status": 401,
+      "latencyMs": 3.56,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/models",
+      "method": "POST",
+      "operationId": "ModelsController_create",
+      "tag": "Models",
+      "status": 401,
+      "latencyMs": 3.97,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/models/{model_id}",
+      "method": "GET",
+      "operationId": "ModelsController_get",
+      "tag": "Models",
+      "status": 401,
+      "latencyMs": 4.06,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/onboarding/complete",
+      "method": "POST",
+      "operationId": "OnboardingController_complete",
+      "tag": "Onboarding",
+      "status": 401,
+      "latencyMs": 4.7,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/onboarding/status",
+      "method": "GET",
+      "operationId": "OnboardingController_status",
+      "tag": "Onboarding",
+      "status": 401,
+      "latencyMs": 2.43,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations",
+      "method": "POST",
+      "operationId": "OrganizationsController_create",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.17,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations",
+      "method": "GET",
+      "operationId": "OrganizationsController_list",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 4.1,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc",
+      "method": "GET",
+      "operationId": "OrganizationsController_get",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.77,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc",
+      "method": "PATCH",
+      "operationId": "OrganizationsController_patch",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 4.8,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/invitations",
+      "method": "GET",
+      "operationId": "OrganizationsController_invitations",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.73,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/invitations",
+      "method": "POST",
+      "operationId": "OrganizationsController_invite",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 4.8,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/invitations/{invitation_id}",
+      "method": "DELETE",
+      "operationId": "OrganizationsController_revokeInvitation",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.57,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/members",
+      "method": "GET",
+      "operationId": "OrganizationsController_members",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.65,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/members",
+      "method": "POST",
+      "operationId": "OrganizationsController_addMember",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 5.14,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/members/{member_id}",
+      "method": "PATCH",
+      "operationId": "OrganizationsController_changeMemberRole",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 4.18,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/members/{member_id}",
+      "method": "DELETE",
+      "operationId": "OrganizationsController_removeMember",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.21,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/roles",
+      "method": "GET",
+      "operationId": "OrganizationsController_roles",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 2.39,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/workspaces",
+      "method": "GET",
+      "operationId": "OrganizationsController_workspaces",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 2.74,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/organizations/c32374f8-c32b-47ec-899f-d168268de2cc/workspaces",
+      "method": "POST",
+      "operationId": "OrganizationsController_workspace",
+      "tag": "Organizations",
+      "status": 401,
+      "latencyMs": 3.2,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/privacy/deletion-status/del-req-confirmation-code-12345",
+      "method": "GET",
+      "operationId": "PrivacyController_status",
+      "tag": "Privacy",
+      "status": 200,
+      "latencyMs": 4.79,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts",
+      "method": "POST",
+      "operationId": "PromptsController_create",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.85,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts",
+      "method": "GET",
+      "operationId": "PromptsController_list",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.09,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "PromptsController_get",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 3.3,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/f7bd85fc-0e4c-4d9c-b342-804062846adf/versions",
+      "method": "GET",
+      "operationId": "PromptsController_versions",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.54,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/f7bd85fc-0e4c-4d9c-b342-804062846adf/versions",
+      "method": "POST",
+      "operationId": "PromptsController_addVersion",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.56,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/f7bd85fc-0e4c-4d9c-b342-804062846adf/versions/60373d72-97b8-4fe6-af53-28c1644d7144",
+      "method": "GET",
+      "operationId": "PromptsController_version",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.1,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/d256e374-e569-4317-9bde-01e8120ba0ca/aliases",
+      "method": "GET",
+      "operationId": "PromptsController_aliases",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 4.44,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/d256e374-e569-4317-9bde-01e8120ba0ca/aliases/{environment}",
+      "method": "PUT",
+      "operationId": "PromptsController_alias",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 3.82,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/d256e374-e569-4317-9bde-01e8120ba0ca/diff",
+      "method": "POST",
+      "operationId": "PromptsController_diff",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 3.23,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/d256e374-e569-4317-9bde-01e8120ba0ca/versions/60373d72-97b8-4fe6-af53-28c1644d7144/playground",
+      "method": "POST",
+      "operationId": "PromptsController_playground",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.68,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/prompts/d256e374-e569-4317-9bde-01e8120ba0ca/versions/60373d72-97b8-4fe6-af53-28c1644d7144/validate",
+      "method": "POST",
+      "operationId": "PromptsController_validate",
+      "tag": "Prompts",
+      "status": 401,
+      "latencyMs": 2.39,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/providers",
+      "method": "POST",
+      "operationId": "ProvidersController_create",
+      "tag": "Providers",
+      "status": 401,
+      "latencyMs": 3.55,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/providers",
+      "method": "GET",
+      "operationId": "ProvidersController_list",
+      "tag": "Providers",
+      "status": 401,
+      "latencyMs": 2.61,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/providers/9df3a5ee-992d-4f98-aea1-2b5304caa8fa",
+      "method": "PATCH",
+      "operationId": "ProvidersController_update",
+      "tag": "Providers",
+      "status": 401,
+      "latencyMs": 2.51,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/providers/9df3a5ee-992d-4f98-aea1-2b5304caa8fa/verify",
+      "method": "POST",
+      "operationId": "ProvidersController_verify",
+      "tag": "Providers",
+      "status": 401,
+      "latencyMs": 6.34,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/quality-policies",
+      "method": "POST",
+      "operationId": "QualityPoliciesController_create",
+      "tag": "QualityPolicies",
+      "status": 401,
+      "latencyMs": 3.82,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/quality-policies",
+      "method": "GET",
+      "operationId": "QualityPoliciesController_list",
+      "tag": "QualityPolicies",
+      "status": 401,
+      "latencyMs": 2.08,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/quality-policies/dry-run",
+      "method": "POST",
+      "operationId": "QualityPoliciesController_dryRun",
+      "tag": "QualityPolicies",
+      "status": 401,
+      "latencyMs": 2.4,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/quality-policies/{policy_id}/versions",
+      "method": "POST",
+      "operationId": "QualityPoliciesController_version",
+      "tag": "QualityPolicies",
+      "status": 401,
+      "latencyMs": 2.32,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases",
+      "method": "POST",
+      "operationId": "ReleasesController_create",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.11,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases",
+      "method": "GET",
+      "operationId": "ReleasesController_list",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 1.81,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "ReleasesController_get",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.34,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/activate",
+      "method": "POST",
+      "operationId": "ReleasesController_activate",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 4.03,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/approve",
+      "method": "POST",
+      "operationId": "ReleasesController_approve",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.86,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/evidence",
+      "method": "GET",
+      "operationId": "ReleasesController_evidence",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 1.73,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/reject",
+      "method": "POST",
+      "operationId": "ReleasesController_reject",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 1.82,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/request-approval",
+      "method": "POST",
+      "operationId": "ReleasesController_requestApproval",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.77,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/rollback",
+      "method": "POST",
+      "operationId": "ReleasesController_rollback",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.31,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/rollout",
+      "method": "GET",
+      "operationId": "ReleasesController_rollout",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 1.81,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/rollout/pause",
+      "method": "POST",
+      "operationId": "ReleasesController_pause",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 1.87,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/rollout/resume",
+      "method": "POST",
+      "operationId": "ReleasesController_resume",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.67,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/releases/f7bd85fc-0e4c-4d9c-b342-804062846adf/verify",
+      "method": "POST",
+      "operationId": "ReleasesController_verify",
+      "tag": "Releases",
+      "status": 401,
+      "latencyMs": 2.32,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/sdk/events",
+      "method": "POST",
+      "operationId": "SdkController_event",
+      "tag": "Sdk",
+      "status": 401,
+      "latencyMs": 0.93,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/sdk/feedback",
+      "method": "POST",
+      "operationId": "SdkController_feedback",
+      "tag": "Sdk",
+      "status": 401,
+      "latencyMs": 0.78,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/system/capabilities",
+      "method": "GET",
+      "operationId": "SystemController_capabilities",
+      "tag": "System",
+      "status": 200,
+      "latencyMs": 0.93,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/system/version",
+      "method": "GET",
+      "operationId": "SystemController_version",
+      "tag": "System",
+      "status": 200,
+      "latencyMs": 0.87,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces",
+      "method": "GET",
+      "operationId": "TracesController_list",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 1.85,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces/summary",
+      "method": "GET",
+      "operationId": "TracesController_summary",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 2.29,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces/f7bd85fc-0e4c-4d9c-b342-804062846adf",
+      "method": "GET",
+      "operationId": "TracesController_get",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 2.64,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces/{trace_id}/feedback",
+      "method": "GET",
+      "operationId": "TracesController_feedback",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 2.63,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces/{trace_id}/replay",
+      "method": "POST",
+      "operationId": "TracesController_replay",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 3.25,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/traces/{trace_id}/spans",
+      "method": "GET",
+      "operationId": "TracesController_spans",
+      "tag": "Traces",
+      "status": 401,
+      "latencyMs": 2.75,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/webhooks/facebook/data-deletion",
+      "method": "POST",
+      "operationId": "FacebookWebhookController_delete",
+      "tag": "FacebookWebhook",
+      "status": 400,
+      "latencyMs": 2.17,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/workspaces/35426bc7-7dc9-4ee1-8059-4d5a93c7f75d",
+      "method": "PATCH",
+      "operationId": "WorkspacesController_patch",
+      "tag": "Workspaces",
+      "status": 401,
+      "latencyMs": 2.89,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/workspaces/35426bc7-7dc9-4ee1-8059-4d5a93c7f75d/applications",
+      "method": "POST",
+      "operationId": "ScopedApplicationsController_create",
+      "tag": "ScopedApplications",
+      "status": 401,
+      "latencyMs": 3.63,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/workspaces/35426bc7-7dc9-4ee1-8059-4d5a93c7f75d/applications",
+      "method": "GET",
+      "operationId": "ScopedApplicationsController_list",
+      "tag": "ScopedApplications",
+      "status": 401,
+      "latencyMs": 2.86,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/api/v1/workspaces/35426bc7-7dc9-4ee1-8059-4d5a93c7f75d/members",
+      "method": "GET",
+      "operationId": "WorkspacesController_members",
+      "tag": "Workspaces",
+      "status": 401,
+      "latencyMs": 2.61,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/health/live",
+      "method": "GET",
+      "operationId": "HealthController_liveness",
+      "tag": "Health",
+      "status": 200,
+      "latencyMs": 1.18,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/health/ready",
+      "method": "GET",
+      "operationId": "HealthController_readiness",
+      "tag": "Health",
+      "status": 200,
+      "latencyMs": 2.03,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/metrics",
+      "method": "GET",
+      "operationId": "MetricsController_metrics",
+      "tag": "Metrics",
+      "status": 200,
+      "latencyMs": 14.3,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/otlp/v1/metrics",
+      "method": "POST",
+      "operationId": "OtlpController_metrics",
+      "tag": "Otlp",
+      "status": 401,
+      "latencyMs": 1.92,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/otlp/v1/traces",
+      "method": "POST",
+      "operationId": "OtlpController_traces",
+      "tag": "Otlp",
+      "status": 401,
+      "latencyMs": 1.4,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/chat/completions",
+      "method": "POST",
+      "operationId": "OpenAiCompatibilityController_completions",
+      "tag": "OpenAiCompatibility",
+      "status": 401,
+      "latencyMs": 1.29,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/embeddings",
+      "method": "POST",
+      "operationId": "OpenAiCompatibilityController_embeddings",
+      "tag": "OpenAiCompatibility",
+      "status": 401,
+      "latencyMs": 2.46,
+      "passed": true,
+      "error": null
+    },
+    {
+      "path": "/v1/models",
+      "method": "GET",
+      "operationId": "OpenAiCompatibilityController_models",
+      "tag": "OpenAiCompatibility",
+      "status": 401,
+      "latencyMs": 1.6,
+      "passed": true,
+      "error": null
+    }
+  ]
+}
