@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Vigilio LLMOps Enterprise Platform Logo (Dark Mode)">
+  <title>Vigilio LLMOps Enterprise Platform</title>
+  <defs>
+    <linearGradient id="vigilio-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <!-- Light squircle base for dark backgrounds -->
+  <rect x="2" y="2" width="508" height="508" rx="94" fill="#FAFAFA" stroke="#E4E4E7" stroke-width="4" />
+  
+  <!-- Outer precision ring subtle -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="2" stroke-dasharray="6 6" />
+
+  <!-- Iconic 'V' Monogram with LLMOps Feedback Loop -->
+  <!-- Left wing -->
+  <polygon points="128,140 188,140 256,330 196,330" fill="#09090B" />
+  <!-- Right wing with vibrant gradient -->
+  <polygon points="384,140 324,140 220,390 280,390" fill="url(#vigilio-grad-dark)" />
+  <!-- Center connecting bridge / diamond -->
+  <polygon points="256,220 288,270 256,320 224,270" fill="#09090B" opacity="0.95" />
+  
+  <!-- Neural Sparkle / Quantum Star at top right -->
+  <path d="M 388 96 Q 396 132 432 140 Q 396 148 388 184 Q 380 148 344 140 Q 380 132 388 96 Z" fill="#059669" />
+  <!-- Micro pulse node at bottom left -->
+  <circle cx="150" cy="380" r="10" fill="#2563EB" />
+</svg>
