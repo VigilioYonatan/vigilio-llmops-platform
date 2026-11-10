@@ -1,0 +1,2 @@
+import {defineConfig} from 'vitest/config';
+export default defineConfig({test:{setupFiles:['test/setup.ts'],include:['test/**/*.test.ts','test/**/*.spec.ts'],exclude:['test/integration/**','test/e2e/**','test/security/**'],coverage:{provider:'v8',reporter:['text','json-summary','lcov'],include:['src/modules/**/domain/**/*.ts','src/shared/crypto.ts'],thresholds:{lines:90,functions:90,statements:90,branches:85}}}});
